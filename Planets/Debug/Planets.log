@@ -1,0 +1,5 @@
+﻿  Source.c
+Y:\GitHub\COMP612_Ass2\Planets\Source.c(113,21): warning C4305: 'function': truncation from 'double' to 'GLfloat'
+  Planets.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Planets.exe
+  Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
+  1 File(s) copied
