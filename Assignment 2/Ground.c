@@ -9,7 +9,6 @@ void render_ground(int mode)
 	// set colour to a tasteless gray for now
 	glColor3f(0.5f, 0.5f, 0.5f);
 
-
 	if (mode) // solid
 	{
 		glBegin(GL_QUADS);
@@ -32,10 +31,36 @@ void test_render(int mode)
 {
 	glPushMatrix();
 
-	GLUquadricObj* obj = gluNewQuadric();
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glTranslatef(0.0f, 0.0f, 2.0f);
+	glColor3f(0.5f, 0.5f, 0.5f);
+	
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);
+	glVertex3d(10.0, 0.0, -10.0);
+	glVertex3d(-10.0, 0.0, -10.0);
+	glVertex3d(-10.0, 0.0, 10.0);
+	glVertex3d(10.0, 0.0, 10.0);
+	glEnd();
 
-	glutSolidTorus(0.5, 1.5, 20, 10);
 	glPopMatrix();
+}
+
+void drawOrigin(void)
+{
+	glBegin(GL_LINES);
+	//draw red x axes line from -2.0 to 2.0
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3d(-0.0, 0.0, 0.0);
+	glVertex3d(2.0, 0.0, 0.0);
+
+	//draw blue y axes line from -2.0 to 2.0
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex3d(0.0, 2.0, 0.0);
+	glVertex3d(0.0, -0.0, 0.0);
+
+	//draw green z axes line from -2.0 to 2.0
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glVertex3d(0.0, 0.0, 2.0);
+	glVertex3d(0.0, 0.0, -0.0);
+
+	glEnd();
 }

@@ -6,6 +6,8 @@ typedef struct _model
 {
 	GLfloat pos[3];
 	GLfloat rot[3];
-	void(*render)(void);
+
+	void(*update)(struct _model*); // update model (rotate, translate etc)
+	void(*render)(struct _model*);
 } Model;
 

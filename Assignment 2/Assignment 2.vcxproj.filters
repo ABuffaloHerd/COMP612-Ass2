@@ -21,9 +21,27 @@
     <ClCompile Include="Ground.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Helicopter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helicopter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

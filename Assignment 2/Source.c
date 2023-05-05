@@ -18,6 +18,9 @@
 #include <math.h>
 
 #include "Ground.h"
+#include "Camera.h"
+#include "GameObject.h"
+#include "Helicopter.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -147,6 +150,10 @@ void initLights(void);
  // Render objects as filled polygons (1) or wireframes (0). Default filled.
 int renderFillEnabled = 1;
 
+// Camera position and orientation. Also a global variable ho ho ho!
+Camera* c;
+GameObject* copter;
+
 /******************************************************************************
  * Entry Point (don't put anything except the main function here)
  ******************************************************************************/
@@ -194,12 +201,20 @@ void main(int argc, char** argv)
  */
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
+	//c->update(c);
+	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
+		0, 0, 0,
+		0, 1, 0);
+
+	copter->render(copter);
+	
 	// each object in here should push and pop its own matrix.
-	//render_ground(renderFillEnabled);
-	test_render(renderFillEnabled);
+
+	test_render(1);
+	drawOrigin();
 
 	glutSwapBuffers();
 }
@@ -209,29 +224,25 @@ void display(void)
 */
 void reshape(int w, int h)
 {
-	const GLfloat left = -10.0f;
-	const GLfloat right = 10.0f;
-	const GLfloat bottom = -5.0f;
-	const GLfloat top = 15.0f;
-	const GLfloat here = -10.0f;
-	const GLfloat there = 10.0f;
+	// update the new width
+	int windowWidth = w;
+	// update the new height
+	int windowHeight = h;
 
-	// set the viewport
-	glViewport(0, 0, w, h);
-	// set the orthographic projection
+	// update the viewport to still be all of the window
+	glViewport(0, 0, windowWidth, windowHeight);
+
+	// change into projection mode so that we can change the camera properties
 	glMatrixMode(GL_PROJECTION);
+
+	// load the identity matrix into the projection matrix
 	glLoadIdentity();
-	if (w <= h) {
-		const GLfloat aspect = (GLfloat)h / (GLfloat)w;
-		glOrtho(left, right, bottom * aspect, top * aspect, here, there);
-	}
-	else {
-		const GLfloat aspect = (GLfloat)w / (GLfloat)h;
-		glOrtho(left * aspect, right * aspect, bottom, top, here, there);
-	}
-	// return to model view mode
+
+	// gluPerspective(fovy, aspect, near, far)
+	gluPerspective(60, (float)windowWidth / (float)windowHeight, 1, 2000);
+
+	// change into model-view mode so that we can change the object positions
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 }
 
 /*
@@ -452,9 +463,12 @@ void idle(void)
  */
 void init(void)
 {
+	glEnable(GL_DEPTH_TEST);
 	initLights();
 
-	glClearColor(0, 0.663, 0.937, 1.0);
+	c = new_camera();
+	copter = new_gameobject(render_helicopter, 0);
+	glClearColor(0, 0.663, 0.937, 1.0); // Set the background colour to sky blue.
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
 }
 
@@ -466,25 +480,46 @@ void init(void)
 	starts. Any setup required before the first frame is drawn should be placed
 	in init().
 */
+
+#define MOVESPEED 50
+#define ROTSPEED 50
+
 void think(void)
 {
-	
-
 	/*
 		Keyboard motion handler: complete this section to make your "player-controlled"
 		object respond to keyboard input.
 	*/
-	if (keyboardMotion.Yaw != MOTION_NONE) {
+
+	float dx = MOVESPEED * FRAME_TIME_SEC * cos(rad(copter->rot[1]));
+	float dz = MOVESPEED * FRAME_TIME_SEC * -sin(rad(copter->rot[1]));
+
+	float dx2 = MOVESPEED * FRAME_TIME_SEC * -cos(rad(copter->rot[1] + 90));
+	float dz2 = MOVESPEED * FRAME_TIME_SEC * sin(rad(copter->rot[1] + 90));
+
+	printf("Go this way: %f %f\n", dx, dz);
+
+	if (keyboardMotion.Yaw != MOTION_NONE) 
+	{
 		/* TEMPLATE: Turn your object right (clockwise) if .Yaw < 0, or left (anticlockwise) if .Yaw > 0 */
+		copter->rot[1] += keyboardMotion.Yaw * FRAME_TIME_SEC * ROTSPEED;
 	}
-	if (keyboardMotion.Surge != MOTION_NONE) {
+	if (keyboardMotion.Surge != MOTION_NONE) 
+	{
 		/* TEMPLATE: Move your object backward if .Surge < 0, or forward if .Surge > 0 */
+		copter->pos[0] += dx * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
+		copter->pos[2] += dz * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
 	}
-	if (keyboardMotion.Sway != MOTION_NONE) {
+	if (keyboardMotion.Sway != MOTION_NONE) 
+	{
 		/* TEMPLATE: Move (strafe) your object left if .Sway < 0, or right if .Sway > 0 */
+		copter->pos[0] += dx2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
+		copter->pos[2] += dz2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
 	}
-	if (keyboardMotion.Heave != MOTION_NONE) {
+	if (keyboardMotion.Heave != MOTION_NONE) 
+	{
 		/* TEMPLATE: Move your object down if .Heave < 0, or up if .Heave > 0 */
+		copter->pos[1] -= keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
 	}
 }
 

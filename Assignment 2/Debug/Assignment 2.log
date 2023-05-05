@@ -1,6 +1,11 @@
 ﻿  Source.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(457,23): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(457,30): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(470,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(471,23): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(471,30): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(494,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(495,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(497,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(498,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include "Object.h"
+#include "Camera.h"
 
 void drawOrigin(void);
 
@@ -24,6 +25,13 @@ const float FRAME_TIME_SEC = (1000 / TARGET_FPS) / 1000.0f;
 unsigned int frameStartTime = 0;
 
 Model planets[5];
+
+Camera* cam;
+
+inline double rad(double deg)
+{
+	return deg * (3.14159 / 180.0);
+}
 
 void init(void)
 {
@@ -64,6 +72,20 @@ void init(void)
 	planets[0].rot[0] = 0;
 	planets[0].rot[1] = 0;
 	planets[0].rot[2] = 0;
+
+	planets[1].pos[0] = 0;
+	planets[1].pos[1] = 0;
+	planets[1].pos[2] = 0;
+			
+	planets[1].rot[0] = 0;
+	planets[1].rot[1] = 0;
+	planets[1].rot[2] = 0;
+
+
+	cam = new_camera();
+	cam->pos[0] = 10;
+	cam->pos[1] = 10;
+	cam->pos[2] = 10;
 }
 
 void reshape(int w, int h)
@@ -83,7 +105,7 @@ void reshape(int w, int h)
 	glLoadIdentity();
 
 	// gluPerspective(fovy, aspect, near, far)
-	gluPerspective(45, (float)windowWidth / (float)windowHeight, 1, 20);
+	gluPerspective(45, (float)windowWidth / (float)windowHeight, 1, 2000);
 
 	// change into model-view mode so that we can change the object positions
 	glMatrixMode(GL_MODELVIEW);
@@ -91,7 +113,14 @@ void reshape(int w, int h)
 
 void think(void)
 {
+	// spin the teapot on the y axis
+	planets[0].rot[1] += 100 * FRAME_TIME_SEC;
 
+	// Orbit the teacup around the teapot
+	// x = d * cos(t)
+	// z = d * sin(t)
+	planets[1].pos[0] = 5 * cos(rad(planets[0].rot[1]));
+	planets[1].pos[2] = 5 * sin(rad(planets[0].rot[1]));
 }
 
 void display(void)
@@ -102,28 +131,36 @@ void display(void)
 	// load the identity matrix into the model view matrix
 	glLoadIdentity();
 
-	gluLookAt(10, 10, 10,
-		0, 0, 0,
-		0, 1, 0);
-	
-	// center planet
-	glColor3f(0.5f, 0.0f, 0.5f);
-	glutSolidSphere(2, 20, 20);
+	cam->update(cam);
 
-	glColor3f(0.1f, 0.2, 0.6f);
+	// put a teapot based on planets[0] position
 	glPushMatrix();
-	glTranslatef(4.5f, 0, 0);
-	glutSolidTeapot(1);
-	//glPopMatrix();
-
-	glColor3f(1.0f, 0.0f, 0.1f);
-	//glPushMatrix();
-	glTranslatef(0, 0, 1.5f);
-	glutSolidTeaspoon(1);
-	//glPopMatrix();
+		glRotatef(planets[0].rot[0], 1, 0, 0);
+		glRotatef(planets[0].rot[1], 0, 1, 0);
+		glRotatef(planets[0].rot[2], 0, 0, 1);
+		glTranslatef(planets[0].pos[0], planets[0].pos[1], planets[0].pos[2]);
+		glColor3d(0.5, 0.5, 0.5);
+		glutSolidTeapot(1);
 	glPopMatrix();
 
+	// orbiting teacup
+	glPushMatrix();
+		glRotatef(planets[1].rot[0], 1, 0, 0);
+		glRotatef(planets[1].rot[1], 0, 1, 0);
+		glRotatef(planets[1].rot[2], 0, 0, 1);
+		glTranslatef(planets[1].pos[0], planets[1].pos[1], planets[1].pos[2]);
+		glColor3d(0.5, 0.5, 0.5);
+		glutSolidTeacup(1);
+
+		glTranslatef(2, 1, 2);
+		glColor3d(0.2, 0.8, 0.4);
+		glutSolidTeaspoon(1);
+
+	glPopMatrix();
+
+	glPushMatrix();
 	drawOrigin();
+	glPopMatrix();
 
 	// swap the drawing buffers
 	glutSwapBuffers();
