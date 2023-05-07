@@ -12,9 +12,10 @@ typedef struct _cam
 	int locked;
 	GLfloat dist;
 	GLfloat lock_target[3];
+	GLfloat lock_target_rot[3];
 
 	void(*update)(struct _cam*);
-	void(*set_target)(struct _cam*, GLfloat[3]);
+	void(*set_target)(struct _cam*, GLfloat[3], GLfloat[3]);
 } Camera;
 
 // my name is proto your security is my motto

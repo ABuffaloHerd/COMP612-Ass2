@@ -112,6 +112,12 @@ motionstate4_t keyboardMotion = { MOTION_NONE, MOTION_NONE, MOTION_NONE, MOTION_
 #define KEY_RENDER_FILL		'l'
 #define KEY_EXIT			27 // Escape key.
 
+#define KEY_TOGGLE_TARGET	't'
+#define KEY_CAMERA_LOCK		'c'
+
+#define KEY_TILT_UP			'f'
+#define KEY_TILT_DOWN		'v'
+
 // Define all GLUT special keys used for input (add any new key definitions here).
 
 #define SP_KEY_MOVE_UP		GLUT_KEY_UP
@@ -140,6 +146,8 @@ void init(void);
 void think(void);
 void initLights(void);
 
+void init_gameobjects(void);
+
 // DEFINITIONS OF DISTANCE
 #define METER 1.0 // 1m = 1.0 glunits
 
@@ -153,6 +161,10 @@ int renderFillEnabled = 1;
 // Camera position and orientation. Also a global variable ho ho ho!
 Camera* c;
 GameObject* copter;
+GameObject* cursor;
+
+// what are we controlling? 
+GameObject* controlledObject;
 
 /******************************************************************************
  * Entry Point (don't put anything except the main function here)
@@ -204,13 +216,15 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	//c->update(c);
+	// Camera looks at whatever the controlled object is
+	// camera update handles the positioning
 	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
-		0, 0, 0,
+		controlledObject->pos[0], controlledObject->pos[1], controlledObject->pos[2],
 		0, 1, 0);
 
 	copter->render(copter);
-	
+	cursor->render(cursor);
+
 	// each object in here should push and pop its own matrix.
 
 	test_render(1);
@@ -288,8 +302,24 @@ void keyPressed(unsigned char key, int x, int y)
 			For example, refer to the existing keys used here (KEY_MOVE_FORWARD,
 			KEY_MOVE_LEFT, KEY_EXIT, etc).
 		*/
+	case KEY_TOGGLE_TARGET:
+		controlledObject = (controlledObject == copter) ? cursor : copter;
+		break;
+	case KEY_CAMERA_LOCK:
+		c->locked = !c->locked;
+		printf("camera lock toggled\n");
+		break;
+	case KEY_TILT_UP:
+		c->rot[0] += 50 * FRAME_TIME_SEC;
+		break;
+	case KEY_TILT_DOWN:
+		c->rot[0] -= 50 * FRAME_TIME_SEC;
 	case KEY_RENDER_FILL:
 		renderFillEnabled = !renderFillEnabled;
+		if (renderFillEnabled)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	case KEY_EXIT:
 		exit(0);
@@ -466,10 +496,20 @@ void init(void)
 	glEnable(GL_DEPTH_TEST);
 	initLights();
 
-	c = new_camera();
-	copter = new_gameobject(render_helicopter, 0);
+	init_gameobjects();
+
 	glClearColor(0, 0.663, 0.937, 1.0); // Set the background colour to sky blue.
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
+}
+
+void init_gameobjects(void)
+{
+	c = new_camera();
+	copter = new_gameobject(render_helicopter, 0);
+	cursor = new_gameobject(render_cursor, 0);
+
+	// stare at the copter by default
+	controlledObject = copter;
 }
 
 /*
@@ -486,40 +526,49 @@ void init(void)
 
 void think(void)
 {
+	// update the camera to stare at the controlled object
+	c->set_target(c, controlledObject->pos, controlledObject->rot);
+	c->update(c);
+	printf("camera position: %f %f %f\n", c->pos[0], c->pos[1], c->pos[2]);
+
+	// are we rendering solid or wires?
+
 	/*
 		Keyboard motion handler: complete this section to make your "player-controlled"
 		object respond to keyboard input.
 	*/
 
-	float dx = MOVESPEED * FRAME_TIME_SEC * cos(rad(copter->rot[1]));
-	float dz = MOVESPEED * FRAME_TIME_SEC * -sin(rad(copter->rot[1]));
+	// update the current controlled object
+	float dx = MOVESPEED * FRAME_TIME_SEC * cos(rad(controlledObject->rot[1]));
+	float dz = MOVESPEED * FRAME_TIME_SEC * -sin(rad(controlledObject->rot[1]));
 
-	float dx2 = MOVESPEED * FRAME_TIME_SEC * -cos(rad(copter->rot[1] + 90));
-	float dz2 = MOVESPEED * FRAME_TIME_SEC * sin(rad(copter->rot[1] + 90));
-
-	printf("Go this way: %f %f\n", dx, dz);
+	float dx2 = MOVESPEED * FRAME_TIME_SEC * -cos(rad(controlledObject->rot[1] + 90));
+	float dz2 = MOVESPEED * FRAME_TIME_SEC * sin(rad(controlledObject->rot[1] + 90));
 
 	if (keyboardMotion.Yaw != MOTION_NONE) 
 	{
 		/* TEMPLATE: Turn your object right (clockwise) if .Yaw < 0, or left (anticlockwise) if .Yaw > 0 */
-		copter->rot[1] += keyboardMotion.Yaw * FRAME_TIME_SEC * ROTSPEED;
+
+		controlledObject->rot[1] += keyboardMotion.Yaw * FRAME_TIME_SEC * ROTSPEED;
 	}
 	if (keyboardMotion.Surge != MOTION_NONE) 
 	{
 		/* TEMPLATE: Move your object backward if .Surge < 0, or forward if .Surge > 0 */
-		copter->pos[0] += dx * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
-		copter->pos[2] += dz * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
+
+		controlledObject->pos[0] += dx * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
+		controlledObject->pos[2] += dz * keyboardMotion.Surge * FRAME_TIME_SEC * MOVESPEED;
 	}
 	if (keyboardMotion.Sway != MOTION_NONE) 
 	{
 		/* TEMPLATE: Move (strafe) your object left if .Sway < 0, or right if .Sway > 0 */
-		copter->pos[0] += dx2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
-		copter->pos[2] += dz2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
+
+		controlledObject->pos[0] += dx2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
+		controlledObject->pos[2] += dz2 * keyboardMotion.Sway * FRAME_TIME_SEC * MOVESPEED;
 	}
 	if (keyboardMotion.Heave != MOTION_NONE) 
 	{
 		/* TEMPLATE: Move your object down if .Heave < 0, or up if .Heave > 0 */
-		copter->pos[1] -= keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
+		controlledObject->pos[1] += keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
 	}
 }
 

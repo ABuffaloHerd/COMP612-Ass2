@@ -17,3 +17,4 @@ typedef struct _obj
 } GameObject;
 
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*));
+void render_cursor(GameObject*);

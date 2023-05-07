@@ -13,13 +13,6 @@ void render_helicopter(GameObject* this)
 	glRotatef(this->rot[2], 0, 0, 1);
 
 	glutSolidTeapot(2);
-	glLineWidth(2.0);
-	glBegin(GL_LINES);
-	// draw a line from the origin of this object in the direction it's heading
-	glVertex3f(0, 0, 0);
-	// x = cos(yaw) z = sin(pitch)
-	glVertex3f(4.0 * cos(this->rot[1]), 0, 4.0 * sin(this->rot[1]));
-	glEnd();
 
 	glPopMatrix();
 }
