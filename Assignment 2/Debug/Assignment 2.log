@@ -1,12 +1,20 @@
 ﻿  Source.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(501,23): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(501,30): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(508,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(509,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(542,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(543,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(545,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(546,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
-  Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(183,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(184,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(185,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(179,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(180,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(243,14): warning C4101: 'z': unreferenced local variable
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(243,11): warning C4101: 'y': unreferenced local variable
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(243,8): warning C4101: 'x': unreferenced local variable
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(541,23): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(541,30): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(548,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(549,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(584,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(585,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(587,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(588,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
+  C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied

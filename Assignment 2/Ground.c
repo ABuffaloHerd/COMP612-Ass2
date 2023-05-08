@@ -64,3 +64,25 @@ void drawOrigin(void)
 
 	glEnd();
 }
+
+void render_grid(void)
+{
+	int gridSize = 10000;
+	int cellSize = 10;
+	int halfGridSize = gridSize / 2;
+
+	glColor3f(0.7f, 0.7f, 0.7f); // Set grid color
+
+	glBegin(GL_LINES);
+	for (int i = -halfGridSize; i <= halfGridSize; i += cellSize)
+	{
+		// Horizontal lines
+		glVertex3f(-halfGridSize, 0, i);
+		glVertex3f(halfGridSize, 0, i);
+
+		// Vertical lines
+		glVertex3f(i, 0, -halfGridSize);
+		glVertex3f(i, 0, halfGridSize);
+	}
+	glEnd();
+}

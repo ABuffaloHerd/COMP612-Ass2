@@ -39,7 +39,7 @@ void update_camera(Camera* c)
 	// If the camera is locked, set the pitch and yaw angles to set values
 	if (c->locked)
 	{
-		c->rot[0] = 40.0f; // Pitch
+		c->rot[0] = 30.0f; // Pitch
 		c->rot[1] = c->lock_target_rot[1] - 90; // Yaw
 	}
 
@@ -59,7 +59,7 @@ Camera* new_camera(void)
 	c->rot[2] = 0;
 
 	c->locked = 0;
-	c->dist = 10;
+	c->dist = 18;
 
 	c->update = update_camera;
 	c->set_target = set_target;

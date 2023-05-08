@@ -118,6 +118,9 @@ motionstate4_t keyboardMotion = { MOTION_NONE, MOTION_NONE, MOTION_NONE, MOTION_
 #define KEY_TILT_UP			'f'
 #define KEY_TILT_DOWN		'v'
 
+#define KEY_ZOOM_IN			'='
+#define KEY_ZOOM_OUT		'-'
+
 // Define all GLUT special keys used for input (add any new key definitions here).
 
 #define SP_KEY_MOVE_UP		GLUT_KEY_UP
@@ -166,6 +169,22 @@ GameObject* cursor;
 // what are we controlling? 
 GameObject* controlledObject;
 
+inline float randf() 
+{
+	return (float)rand() / (float)RAND_MAX;
+}
+
+void randomPointOnSphere(float r, float* x, float* y, float* z) {
+	// Generate random azimuthal angle (theta) and polar angle (phi)
+	float theta = 2.0f * 3.14159 * randf();
+	float phi = acos(2.0f * randf() - 1.0f);
+
+	// Convert from spherical to Cartesian coordinates
+	*x = r * sin(phi) * cos(theta);
+	*y = r * sin(phi) * sin(theta);
+	*z = r * cos(phi);
+}
+
 /******************************************************************************
  * Entry Point (don't put anything except the main function here)
  ******************************************************************************/
@@ -176,7 +195,7 @@ void main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1280, 720);
-	glutCreateWindow("Animation");
+	glutCreateWindow("The Battle of Britain II");
 
 	// Set up the scene.
 	init();
@@ -218,17 +237,27 @@ void display(void)
 
 	// Camera looks at whatever the controlled object is
 	// camera update handles the positioning
+
+	// objects that move with the camera go first
+	glPushMatrix();
+	float x, y, z; // random coords
+	//randomPointOnSphere(50, &x, &y, &z);
+	glTranslatef(60, 2, -200);
+	glRotated(20, 0.2, 0.0, 0.5);
+	glutSolidCube(5);
+	glPopMatrix();
+
 	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
 		controlledObject->pos[0], controlledObject->pos[1], controlledObject->pos[2],
 		0, 1, 0);
 
+	// render objects
 	copter->render(copter);
 	cursor->render(cursor);
 
-	// each object in here should push and pop its own matrix.
-
 	test_render(1);
 	drawOrigin();
+	render_grid();
 
 	glutSwapBuffers();
 }
@@ -309,11 +338,22 @@ void keyPressed(unsigned char key, int x, int y)
 		c->locked = !c->locked;
 		printf("camera lock toggled\n");
 		break;
+
 	case KEY_TILT_UP:
-		c->rot[0] += 50 * FRAME_TIME_SEC;
+		c->rot[0] += 500 * FRAME_TIME_SEC;
 		break;
 	case KEY_TILT_DOWN:
-		c->rot[0] -= 50 * FRAME_TIME_SEC;
+		c->rot[0] -= 500 * FRAME_TIME_SEC;
+		break;
+
+	case KEY_ZOOM_IN:
+		c->dist -= 5;
+		break;
+	case KEY_ZOOM_OUT:
+		c->dist += 5;
+		break;
+
+
 	case KEY_RENDER_FILL:
 		renderFillEnabled = !renderFillEnabled;
 		if (renderFillEnabled)
@@ -522,7 +562,7 @@ void init_gameobjects(void)
 */
 
 #define MOVESPEED 50
-#define ROTSPEED 50
+#define ROTSPEED 60
 
 void think(void)
 {
@@ -539,6 +579,8 @@ void think(void)
 	*/
 
 	// update the current controlled object
+
+	// no fucking clue why it has to be -sin or -cos so i'm assuming it's just black magic
 	float dx = MOVESPEED * FRAME_TIME_SEC * cos(rad(controlledObject->rot[1]));
 	float dz = MOVESPEED * FRAME_TIME_SEC * -sin(rad(controlledObject->rot[1]));
 
@@ -570,6 +612,10 @@ void think(void)
 		/* TEMPLATE: Move your object down if .Heave < 0, or up if .Heave > 0 */
 		controlledObject->pos[1] += keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
 	}
+
+	// more trouble than it's worth to get working
+	//controlledObject->rot[2] = -1 * keyboardMotion.Surge * 10.0f;
+	//controlledObject->rot[0] = 1 * keyboardMotion.Sway * 10.0f;
 }
 
 /*
