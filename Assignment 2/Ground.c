@@ -24,7 +24,7 @@ void render_ground(int mode)
 		glBegin(GL_LINES);
 		glEnd();
 	}
-	printf("test");
+	//printf("test");
 }
 
 void test_render(int mode)

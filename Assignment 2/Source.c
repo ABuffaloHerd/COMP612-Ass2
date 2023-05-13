@@ -21,6 +21,7 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "Helicopter.h"
+#include "SoundSystem.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -41,6 +42,12 @@ const float FRAME_TIME_SEC = (1000 / TARGET_FPS) / 1000.0f;
 // Time we started preparing the current frame (in milliseconds since GLUT was initialized).
 unsigned int frameStartTime = 0;
 
+
+// Total frames since program started.
+// it's okay to leave this adding because 1) it overflows 2) 18,446,744,073,709,551,615 is the limit
+long long unsigned int frameCount = 0;
+
+
 /******************************************************************************
  * Some Simple Definitions of Motion
  ******************************************************************************/
@@ -55,6 +62,11 @@ unsigned int frameStartTime = 0;
 #define MOTION_DOWN -1				// Downward motion.
 #define MOTION_UP 1					// Upward motion.
 
+#define MOTION_LOOK_UP 1
+#define MOTION_LOOK_DOWN -1
+#define MOTION_ZOOM_IN 1
+#define MOTION_ZOOM_OUT -1
+
  // Represents the motion of an object on four axes (Yaw, Surge, Sway, and Heave).
  // 
  // You can use any numeric values, as specified in the comments for each axis. However,
@@ -67,6 +79,13 @@ typedef struct {
 	int Sway;		// Move sideways (strafe)	[<0 = Left, 0 = Stop, >0 = Right]
 	int Heave;		// Move vertically			[<0 = Down, 0 = Stop, >0 = Up]
 } motionstate4_t;
+
+// represents camera motion
+typedef struct _cammotion
+{
+	int Zoom;
+	int Tilt;
+} cameramotion_t;
 
 /******************************************************************************
  * Keyboard Input Handling Setup
@@ -90,16 +109,33 @@ typedef struct {
 	keystate_t TurnRight;
 } motionkeys_t;
 
+typedef struct _camkeys
+{
+	keystate_t ZoomIn;
+	keystate_t ZoomOut;
+	keystate_t TiltUp;
+	keystate_t TiltDown;
+} camkeys_t;
+
 // Current state of all keys used to control our "player-controlled" object's motion.
 motionkeys_t motionKeyStates = {
 	KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP,
 	KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP };
+
+// state of keys used to control camera
+camkeys_t camKeyStates = 
+{
+	KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP, KEYSTATE_UP 
+};
 
 // How our "player-controlled" object should currently be moving, solely based on keyboard input.
 //
 // Note: this may not represent the actual motion of our object, which could be subject to
 // other controls (e.g. mouse input) or other simulated forces (e.g. gravity).
 motionstate4_t keyboardMotion = { MOTION_NONE, MOTION_NONE, MOTION_NONE, MOTION_NONE };
+
+// how the camera should currently be moving, solely based on keyboard input
+cameramotion_t keyboardCameraMotion = { MOTION_NONE, MOTION_NONE };
 
 // Define all character keys used for input (add any new key definitions here).
 // Note: USE ONLY LOWERCASE CHARACTERS HERE. The keyboard handler provided converts all
@@ -120,6 +156,8 @@ motionstate4_t keyboardMotion = { MOTION_NONE, MOTION_NONE, MOTION_NONE, MOTION_
 
 #define KEY_ZOOM_IN			'='
 #define KEY_ZOOM_OUT		'-'
+
+#define KEY_DEBUG_SOUND		'0'
 
 // Define all GLUT special keys used for input (add any new key definitions here).
 
@@ -174,7 +212,8 @@ inline float randf()
 	return (float)rand() / (float)RAND_MAX;
 }
 
-void randomPointOnSphere(float r, float* x, float* y, float* z) {
+void randomPointOnSphere(float r, float* x, float* y, float* z) 
+{
 	// Generate random azimuthal angle (theta) and polar angle (phi)
 	float theta = 2.0f * 3.14159 * randf();
 	float phi = acos(2.0f * randf() - 1.0f);
@@ -324,6 +363,26 @@ void keyPressed(unsigned char key, int x, int y)
 		break;
 
 		/*
+			I AM IGNORING THE COMMENT AND MODIFYING THIS SECTION HAHAHAHAHA
+		*/
+	case KEY_TILT_UP:
+		camKeyStates.TiltUp = KEYSTATE_DOWN;
+		keyboardCameraMotion.Tilt = MOTION_LOOK_UP;
+		break;
+	case KEY_TILT_DOWN:
+		camKeyStates.TiltDown = KEYSTATE_DOWN;
+		keyboardCameraMotion.Tilt = MOTION_LOOK_DOWN;
+		break;
+	case KEY_ZOOM_IN:
+		camKeyStates.ZoomIn = KEYSTATE_DOWN;
+		keyboardCameraMotion.Zoom = MOTION_ZOOM_IN;
+		break;
+	case KEY_ZOOM_OUT:
+		camKeyStates.ZoomOut = KEYSTATE_DOWN;
+		keyboardCameraMotion.Zoom = MOTION_ZOOM_OUT;
+		break;
+
+		/*
 			Other Keyboard Functions (add any new character key controls here)
 
 			Rather than using literals (e.g. "t" for spotlight), create a new KEY_
@@ -336,21 +395,25 @@ void keyPressed(unsigned char key, int x, int y)
 		break;
 	case KEY_CAMERA_LOCK:
 		c->locked = !c->locked;
-		printf("camera lock toggled\n");
+		//printf("camera lock toggled\n");
 		break;
 
-	case KEY_TILT_UP:
-		c->rot[0] += 500 * FRAME_TIME_SEC;
-		break;
-	case KEY_TILT_DOWN:
-		c->rot[0] -= 500 * FRAME_TIME_SEC;
-		break;
+	//case KEY_TILT_UP:
+	//	c->rot[0] += 500 * FRAME_TIME_SEC;
+	//	break;
+	//case KEY_TILT_DOWN:
+	//	c->rot[0] -= 500 * FRAME_TIME_SEC;
+	//	break;
 
-	case KEY_ZOOM_IN:
-		c->dist -= 5;
-		break;
-	case KEY_ZOOM_OUT:
-		c->dist += 5;
+	//case KEY_ZOOM_IN:
+	//	c->dist -= 5;
+	//	break;
+	//case KEY_ZOOM_OUT:
+	//	c->dist += 5;
+	//	break;
+
+	case KEY_DEBUG_SOUND:
+		play_sound(SOUND_EXPLODE);
 		break;
 
 
@@ -442,6 +505,26 @@ void keyReleased(unsigned char key, int x, int y)
 	case KEY_MOVE_RIGHT:
 		motionKeyStates.MoveRight = KEYSTATE_UP;
 		keyboardMotion.Sway = (motionKeyStates.MoveLeft == KEYSTATE_DOWN) ? MOTION_LEFT : MOTION_NONE;
+		break;
+
+		/*
+		*	I AM CHANGING THE SECTION HAHAHAHA
+		*/
+	case KEY_TILT_UP:
+		camKeyStates.TiltUp = KEYSTATE_UP;
+		keyboardCameraMotion.Tilt = (camKeyStates.TiltUp == KEYSTATE_DOWN) ? MOTION_LOOK_UP : MOTION_NONE;
+		break;
+	case KEY_TILT_DOWN:
+		camKeyStates.TiltDown = KEYSTATE_UP;
+		keyboardCameraMotion.Tilt = (camKeyStates.TiltDown == KEYSTATE_DOWN) ? MOTION_LOOK_DOWN : MOTION_NONE;
+		break;
+	case KEY_ZOOM_IN:
+		camKeyStates.ZoomIn = KEYSTATE_UP;
+		keyboardCameraMotion.Zoom = (camKeyStates.ZoomIn == KEYSTATE_DOWN) ? MOTION_ZOOM_IN : MOTION_NONE;
+		break;
+	case KEY_ZOOM_OUT:
+		camKeyStates.ZoomOut = KEYSTATE_UP;
+		keyboardCameraMotion.Zoom = (camKeyStates.ZoomOut == KEYSTATE_DOWN) ? MOTION_ZOOM_OUT : MOTION_NONE;
 		break;
 
 		/*
@@ -538,7 +621,8 @@ void init(void)
 
 	init_gameobjects();
 
-	glClearColor(0, 0.663, 0.937, 1.0); // Set the background colour to sky blue.
+	//glClearColor(0, 0.663, 0.937, 1.0); // Set the background colour to sky blue. #00A9EF
+	glClearColor(0.98, 0.373, 0.333, 1.0); // set background colour to sunset orange #FA5F55
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
 }
 
@@ -563,15 +647,15 @@ void init_gameobjects(void)
 
 #define MOVESPEED 50
 #define ROTSPEED 60
+#define ZOOMSPEED 50
+#define TILTSPEED 50
 
 void think(void)
 {
 	// update the camera to stare at the controlled object
 	c->set_target(c, controlledObject->pos, controlledObject->rot);
 	c->update(c);
-	printf("camera position: %f %f %f\n", c->pos[0], c->pos[1], c->pos[2]);
-
-	// are we rendering solid or wires?
+	//printf("camera position: %f %f %f\n", c->pos[0], c->pos[1], c->pos[2]);
 
 	/*
 		Keyboard motion handler: complete this section to make your "player-controlled"
@@ -611,6 +695,17 @@ void think(void)
 	{
 		/* TEMPLATE: Move your object down if .Heave < 0, or up if .Heave > 0 */
 		controlledObject->pos[1] += keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
+	}
+
+	// camera controls
+	if (keyboardCameraMotion.Zoom != MOTION_NONE)
+	{
+		/* NOT A TEMPLATE: Zoom the camera in if .Zoom < 0, or out if .Zoom > 0 */
+		c->dist += keyboardCameraMotion.Zoom * FRAME_TIME_SEC * ZOOMSPEED;
+	}
+	if (keyboardCameraMotion.Tilt != MOTION_NONE)
+	{
+		c->rot[0] += keyboardCameraMotion.Tilt * FRAME_TIME_SEC * TILTSPEED;
 	}
 
 	// more trouble than it's worth to get working

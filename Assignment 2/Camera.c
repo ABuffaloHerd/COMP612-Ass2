@@ -43,7 +43,7 @@ void update_camera(Camera* c)
 		c->rot[1] = c->lock_target_rot[1] - 90; // Yaw
 	}
 
-	printf("Camera lockon target: %f, %f, %f ", c->lock_target[0], c->lock_target[1], c->lock_target[2]);
+	//printf("Camera lockon target: %f, %f, %f ", c->lock_target[0], c->lock_target[1], c->lock_target[2]);
 }
 
 Camera* new_camera(void)

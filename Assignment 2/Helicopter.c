@@ -4,6 +4,8 @@ extern const float FRAME_TIME_SEC;
 
 #define SPINRATE 1000.0f
 #define TEACUP_DIST 4.0f
+#define COPTER_SCALE 2.0
+
 
 void render_helicopter(GameObject* this)
 {
@@ -20,15 +22,15 @@ void render_helicopter(GameObject* this)
 	glRotatef(this->rot[1], 0, 1, 0);
 	glRotatef(this->rot[2], 0, 0, 1);
 
-	glutSolidTeapot(2);
+	glutSolidTeapot(COPTER_SCALE);
 
 	// tail
 	glPushMatrix();
 
 	glRotated(-90, 0.0, 1.0, 0.0);
-	glutSolidCylinder(0.5, 8.0, 20, 20);
+	glutSolidCylinder(0.5, 4 * COPTER_SCALE, 20, 20);
 
-	glTranslated(0.0, 0.0, 8.0);
+	glTranslated(0.0, 0.0, 4 * COPTER_SCALE);
 	glutSolidCone(0.5, 1.0, 10, 10);
 
 	// tail propeller, bound to the tail position
@@ -77,8 +79,16 @@ void render_helicopter(GameObject* this)
 	glutSolidTeacup(1);
 	glPopMatrix(); // pop the weapons
 
+	// things that hold the teacups in place
+	glPushMatrix();
+	glTranslated(0.0, -0.3, 0.0);
+	glScaled(0.1, 0.01, TEACUP_DIST / 2);
+	glutSolidCube(TEACUP_DIST);
+	glPopMatrix();
+
 	glPopMatrix(); // pop the body
-	proprot += SPINRATE * FRAME_TIME_SEC;
+
+	proprot += SPINRATE * FRAME_TIME_SEC; // update rotor angle
 }
 
 void update_helicopter(GameObject* this)

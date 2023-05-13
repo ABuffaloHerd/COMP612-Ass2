@@ -87,7 +87,8 @@
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
+xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,7 +112,8 @@
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
+xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -131,7 +133,8 @@
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
+xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +158,8 @@
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
+xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -163,6 +167,7 @@
     <ClCompile Include="GameObject.c" />
     <ClCompile Include="Ground.c" />
     <ClCompile Include="Helicopter.c" />
+    <ClCompile Include="SoundSystem.c" />
     <ClCompile Include="Source.c" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +175,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Helicopter.h" />
+    <ClInclude Include="SoundSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
