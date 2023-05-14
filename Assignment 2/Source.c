@@ -12,7 +12,8 @@
  * included in the animationalcontrol.c template. There are no other changes.
  *
  ******************************************************************************/
-
+#define _CRT_SECURE_NO_WARNINGS // i am on my knees begging for a buffer overflow
+#pragma warning(disable:4996) // FUCKING LET ME COMPILE YOU PIECE OF SHITA
 #include <Windows.h>
 #include <freeglut.h>
 #include <math.h>
@@ -22,6 +23,7 @@
 #include "GameObject.h"
 #include "Helicopter.h"
 #include "SoundSystem.h"
+#include "Texture.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -207,6 +209,10 @@ GameObject* cursor;
 // what are we controlling? 
 GameObject* controlledObject;
 
+// TEXTURE TEST
+Texture* trollface;
+
+
 inline float randf() 
 {
 	return (float)rand() / (float)RAND_MAX;
@@ -278,13 +284,13 @@ void display(void)
 	// camera update handles the positioning
 
 	// objects that move with the camera go first
-	glPushMatrix();
-	float x, y, z; // random coords
-	//randomPointOnSphere(50, &x, &y, &z);
-	glTranslatef(60, 2, -200);
-	glRotated(20, 0.2, 0.0, 0.5);
-	glutSolidCube(5);
-	glPopMatrix();
+	//glPushMatrix();
+	//float x, y, z; // random coords
+	////randomPointOnSphere(50, &x, &y, &z);
+	//glTranslatef(60, 2, -200);
+	//glRotated(20, 0.2, 0.0, 0.5);
+	//glutSolidCube(5);
+	//glPopMatrix();
 
 	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
 		controlledObject->pos[0], controlledObject->pos[1], controlledObject->pos[2],
@@ -294,7 +300,10 @@ void display(void)
 	copter->render(copter);
 	cursor->render(cursor);
 
-	test_render(1);
+	// Texture test
+	texture_test(trollface);
+
+	render_ground(100);
 	drawOrigin();
 	render_grid();
 
@@ -420,9 +429,9 @@ void keyPressed(unsigned char key, int x, int y)
 	case KEY_RENDER_FILL:
 		renderFillEnabled = !renderFillEnabled;
 		if (renderFillEnabled)
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		else
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		break;
 	case KEY_EXIT:
 		exit(0);
@@ -617,6 +626,7 @@ void idle(void)
 void init(void)
 {
 	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_TEXTURE_2D); // only call when drawing with textures. Textured objects should enable and disable this in their render functions.
 	initLights();
 
 	init_gameobjects();
@@ -624,6 +634,10 @@ void init(void)
 	//glClearColor(0, 0.663, 0.937, 1.0); // Set the background colour to sky blue. #00A9EF
 	glClearColor(0.98, 0.373, 0.333, 1.0); // set background colour to sunset orange #FA5F55
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
+
+	play_sound(SOUND_MIDI);
+
+	trollface = load_texture("textures/trollface.ppm", "trollface");
 }
 
 void init_gameobjects(void)

@@ -4,27 +4,18 @@
 
 const int size = 10;
 
-void render_ground(int mode)
+void render_ground(float size)
 {
 	// set colour to a tasteless gray for now
 	glColor3f(0.5f, 0.5f, 0.5f);
 
-	if (mode) // solid
-	{
-		glBegin(GL_QUADS);
-		glNormal3f(0.0f, 1.0f, 0.0f); // face up
-		glVertex3f(-size, 0.0f, -size);
-		glVertex3f(-size, 0.0f, size);
-		glVertex3f(size, 0.0f, size);
-		glVertex3f(size, 0.0f, -size);
-		glEnd();
-	}
-	else
-	{
-		glBegin(GL_LINES);
-		glEnd();
-	}
-	//printf("test");
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 1.0f, 0.0f); // face up
+	glVertex3f(-size, 0.0f, -size);
+	glVertex3f(-size, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, -size);
+	glEnd();
 }
 
 void test_render(int mode)

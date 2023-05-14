@@ -1,23 +1,23 @@
 ﻿  Source.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(222,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(223,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(224,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(218,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(219,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(282,14): warning C4101: 'z': unreferenced local variable
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(282,11): warning C4101: 'y': unreferenced local variable
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(282,8): warning C4101: 'x': unreferenced local variable
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(625,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(625,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(625,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(632,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(633,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(668,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(669,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(671,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(672,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(228,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(229,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(230,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(224,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(225,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(646,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(647,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(682,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(683,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(685,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(686,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
   Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\explode.wav
+  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
+  2 File(s) copied
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
   1 File(s) copied
