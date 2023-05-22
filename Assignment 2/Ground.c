@@ -2,20 +2,37 @@
 #include "Ground.h"
 #include <stdio.h>
 
-const int size = 10;
+const int size = 1000;
+extern int renderFillEnabled;
 
-void render_ground(float size)
+void render_ground(float quadSize)
 {
-	// set colour to a tasteless gray for now
-	glColor3f(0.5f, 0.5f, 0.5f);
+	// Save current state
+	glPushMatrix();
 
-	glBegin(GL_QUADS);
-	glNormal3f(0.0f, 1.0f, 0.0f); // face up
-	glVertex3f(-size, 0.0f, -size);
-	glVertex3f(-size, 0.0f, size);
-	glVertex3f(size, 0.0f, size);
-	glVertex3f(size, 0.0f, -size);
-	glEnd();
+	// Set the color for the ground plane
+	glColor3f(0.2f, 0.2f, 0.2f);
+
+	// Draw the ground plane as a grid of quads
+	for (int x = -size; x < size; x++) 
+	{
+		for (int z = -size; z < size; z++) 
+		{
+			glBegin(GL_QUADS);
+			glNormal3i(0, 1, 0);
+			glVertex3f(x * quadSize, 0, z * quadSize);
+			glNormal3i(0, 1, 0);
+			glVertex3f(x * quadSize, 0, (z + 1) * quadSize);
+			glNormal3i(0, 1, 0);
+			glVertex3f((x + 1) * quadSize, 0, (z + 1) * quadSize);
+			glNormal3i(0, 1, 0);
+			glVertex3f((x + 1) * quadSize, 0, z * quadSize);
+			glEnd();
+		}
+	}
+
+	// Restore previous state
+	glPopMatrix();
 }
 
 void test_render(int mode)
@@ -58,11 +75,12 @@ void drawOrigin(void)
 
 void render_grid(void)
 {
+	if (renderFillEnabled) return;
 	int gridSize = 10000;
 	int cellSize = 10;
 	int halfGridSize = gridSize / 2;
 
-	glColor3f(0.7f, 0.7f, 0.7f); // Set grid color
+	glColor3f(0.0f, 0.0f, 0.0f); // Set grid color
 
 	glBegin(GL_LINES);
 	for (int i = -halfGridSize; i <= halfGridSize; i += cellSize)

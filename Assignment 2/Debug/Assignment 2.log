@@ -1,23 +1,17 @@
-﻿  Source.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(228,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(229,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(230,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(224,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(225,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(635,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(646,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(647,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(682,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(683,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(685,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(686,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
-  Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
+﻿  Ground.c
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(89,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(89,32): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(90,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(90,31): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(93,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(93,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(94,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(94,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+  Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
+  C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
-  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\explode.wav
-  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\explode.wav
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
   2 File(s) copied
-  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\textures\trollface.ppm
   1 File(s) copied

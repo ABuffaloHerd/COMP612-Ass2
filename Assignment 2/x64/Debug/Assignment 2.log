@@ -1,8 +1,28 @@
 ﻿  Source.c
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(228,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(229,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(230,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(224,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(225,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(635,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(635,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(635,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(646,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(647,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(682,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(683,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(685,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(686,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Helicopter.obj : error LNK2019: unresolved external symbol __imp_glutSolidCube referenced in function render_helicopter
+Helicopter.obj : error LNK2019: unresolved external symbol __imp_glutSolidCone referenced in function render_helicopter
+Helicopter.obj : error LNK2019: unresolved external symbol __imp_glutSolidTeapot referenced in function render_helicopter
+Helicopter.obj : error LNK2019: unresolved external symbol __imp_glutSolidCylinder referenced in function render_helicopter
+Helicopter.obj : error LNK2019: unresolved external symbol __imp_glutSolidTeacup referenced in function render_helicopter
 Source.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutInitDisplayMode referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutPostRedisplay referenced in function idle
+Source.obj : error LNK2019: unresolved external symbol __imp_glutSwapBuffers referenced in function display
 Source.obj : error LNK2019: unresolved external symbol __imp_glutIdleFunc referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutKeyboardFunc referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutSpecialFunc referenced in function main
@@ -14,5 +34,5 @@ Source.obj : error LNK2019: unresolved external symbol __imp_glutGet referenced 
 Source.obj : error LNK2019: unresolved external symbol __imp_glutSetKeyRepeat referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp___glutInitWithExit referenced in function glutInit_ATEXIT_HACK
 Source.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowWithExit referenced in function glutCreateWindow_ATEXIT_HACK
-Y:\GitHub\COMP612_Ass2\freeglut\lib\freeglut.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-Y:\GitHub\COMP612_Ass2\x64\Debug\Assignment 2.exe : fatal error LNK1120: 15 unresolved externals
+C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\lib\freeglut.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\x64\Debug\Assignment 2.exe : fatal error LNK1120: 21 unresolved externals

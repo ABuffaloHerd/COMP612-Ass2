@@ -211,6 +211,7 @@ GameObject* controlledObject;
 
 // TEXTURE TEST
 Texture* trollface;
+float texture_rotation;
 
 
 inline float randf() 
@@ -283,15 +284,6 @@ void display(void)
 	// Camera looks at whatever the controlled object is
 	// camera update handles the positioning
 
-	// objects that move with the camera go first
-	//glPushMatrix();
-	//float x, y, z; // random coords
-	////randomPointOnSphere(50, &x, &y, &z);
-	//glTranslatef(60, 2, -200);
-	//glRotated(20, 0.2, 0.0, 0.5);
-	//glutSolidCube(5);
-	//glPopMatrix();
-
 	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
 		controlledObject->pos[0], controlledObject->pos[1], controlledObject->pos[2],
 		0, 1, 0);
@@ -301,11 +293,18 @@ void display(void)
 	cursor->render(cursor);
 
 	// Texture test
+	// texture rotate test
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+	glRotatef(copter->rot[1], 0, 0, 1);
 	texture_test(trollface);
+	
+	glMatrixMode(GL_MODELVIEW);
 
-	render_ground(100);
+	render_ground(10);
 	drawOrigin();
-	render_grid();
+	//render_grid();
+	
 
 	glutSwapBuffers();
 }
@@ -638,6 +637,7 @@ void init(void)
 	play_sound(SOUND_MIDI);
 
 	trollface = load_texture("textures/trollface.ppm", "trollface");
+	texture_rotation = 0.0f;
 }
 
 void init_gameobjects(void)
@@ -669,7 +669,9 @@ void think(void)
 	// update the camera to stare at the controlled object
 	c->set_target(c, controlledObject->pos, controlledObject->rot);
 	c->update(c);
-	//printf("camera position: %f %f %f\n", c->pos[0], c->pos[1], c->pos[2]);
+	
+
+	texture_rotation += 50 * FRAME_TIME_SEC;
 
 	/*
 		Keyboard motion handler: complete this section to make your "player-controlled"
