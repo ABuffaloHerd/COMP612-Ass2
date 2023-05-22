@@ -2,10 +2,11 @@
 #include "Ground.h"
 #include <stdio.h>
 
-const int size = 1000;
+const int size = 100;
+const int quadSize = 10;
 extern int renderFillEnabled;
 
-void render_ground(float quadSize)
+void render_ground(void)
 {
 	// Save current state
 	glPushMatrix();

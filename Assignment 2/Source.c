@@ -24,6 +24,7 @@
 #include "Helicopter.h"
 #include "SoundSystem.h"
 #include "Texture.h"
+#include "DisplayList.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -213,6 +214,8 @@ GameObject* controlledObject;
 Texture* trollface;
 float texture_rotation;
 
+// DIsplay list inator
+DisplayList* displayList;
 
 inline float randf() 
 {
@@ -301,7 +304,8 @@ void display(void)
 	
 	glMatrixMode(GL_MODELVIEW);
 
-	render_ground(10);
+	//render_ground(10);
+	render_displaylist(displayList);
 	drawOrigin();
 	//render_grid();
 	
@@ -638,6 +642,9 @@ void init(void)
 
 	trollface = load_texture("textures/trollface.ppm", "trollface");
 	texture_rotation = 0.0f;
+
+	displayList = init_displaylist();
+	insert_displaylist(displayList, render_ground);
 }
 
 void init_gameobjects(void)

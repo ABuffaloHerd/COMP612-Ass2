@@ -168,6 +168,7 @@ xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.c" />
+    <ClCompile Include="DisplayList.c" />
     <ClCompile Include="GameObject.c" />
     <ClCompile Include="Ground.c" />
     <ClCompile Include="Helicopter.c" />
@@ -177,6 +178,7 @@ xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DisplayList.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Helicopter.h" />

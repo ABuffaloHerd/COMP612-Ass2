@@ -1,12 +1,18 @@
-﻿  Ground.c
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(89,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(89,32): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(90,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(90,31): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(93,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(93,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(94,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Ground.c(94,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+﻿  Source.c
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(232,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(233,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(234,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(228,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(229,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(638,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(638,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(638,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(653,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(654,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(691,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(692,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(694,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Source.c(695,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
   C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
