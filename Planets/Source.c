@@ -62,7 +62,7 @@ void init(void)
 	glEnable(GL_NORMALIZE);
 
 	// Enable use of simple GL colours as materials.
-	glEnable(GL_COLOR_MATERIAL);
+	//glEnable(GL_COLOR_MATERIAL);
 
 	// planets
 	planets[0].pos[0] = 0;
@@ -133,34 +133,43 @@ void display(void)
 
 	cam->update(cam);
 
-	// put a teapot based on planets[0] position
-	glPushMatrix();
-		glRotatef(planets[0].rot[0], 1, 0, 0);
-		glRotatef(planets[0].rot[1], 0, 1, 0);
-		glRotatef(planets[0].rot[2], 0, 0, 1);
-		glTranslatef(planets[0].pos[0], planets[0].pos[1], planets[0].pos[2]);
-		glColor3d(0.5, 0.5, 0.5);
-		glutSolidTeapot(1);
-	glPopMatrix();
+	GLfloat emmissive[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	GLfloat diffuse[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	glMaterialfv(GL_FRONT, GL_EMISSION, emmissive);
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, diffuse);
+	glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
+	glutSolidTeaspoon(4);
+	//glutSolidTeapot(2);
+	
+	//// put a teapot based on planets[0] position
+	//glPushMatrix();
+	//	glRotatef(planets[0].rot[0], 1, 0, 0);
+	//	glRotatef(planets[0].rot[1], 0, 1, 0);
+	//	glRotatef(planets[0].rot[2], 0, 0, 1);
+	//	glTranslatef(planets[0].pos[0], planets[0].pos[1], planets[0].pos[2]);
+	//	glColor3d(0.5, 0.5, 0.5);
+	//	glutSolidTeapot(1);
+	//glPopMatrix();
 
-	// orbiting teacup
-	glPushMatrix();
-		glRotatef(planets[1].rot[0], 1, 0, 0);
-		glRotatef(planets[1].rot[1], 0, 1, 0);
-		glRotatef(planets[1].rot[2], 0, 0, 1);
-		glTranslatef(planets[1].pos[0], planets[1].pos[1], planets[1].pos[2]);
-		glColor3d(0.5, 0.5, 0.5);
-		glutSolidTeacup(1);
+	//// orbiting teacup
+	//glPushMatrix();
+	//	glRotatef(planets[1].rot[0], 1, 0, 0);
+	//	glRotatef(planets[1].rot[1], 0, 1, 0);
+	//	glRotatef(planets[1].rot[2], 0, 0, 1);
+	//	glTranslatef(planets[1].pos[0], planets[1].pos[1], planets[1].pos[2]);
+	//	glColor3d(0.5, 0.5, 0.5);
+	//	glutSolidTeacup(1);
 
-		glTranslatef(2, 1, 2);
-		glColor3d(0.2, 0.8, 0.4);
-		glutSolidTeaspoon(1);
+	//	glTranslatef(2, 1, 2);
+	//	glColor3d(0.2, 0.8, 0.4);
+	//	glutSolidTeaspoon(1);
 
-	glPopMatrix();
+	//glPopMatrix();
 
-	glPushMatrix();
-	drawOrigin();
-	glPopMatrix();
+	//glPushMatrix();
+	//drawOrigin();
+	//glPopMatrix();
 
 	// swap the drawing buffers
 	glutSwapBuffers();

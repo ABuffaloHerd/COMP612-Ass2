@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "Texture.h"
+#include "Misc.h"
 
 inline double rad(double deg)
 {
@@ -15,7 +16,7 @@ typedef struct _obj
 	GLfloat pos[3];
 	GLfloat rot[3];
 
-	Texture* texture;
+	Texture* texture; // TODO: memory leak lol
 
 	void(*render)(struct _obj*);
 	void(*update)(struct _obj*);
@@ -24,5 +25,6 @@ typedef struct _obj
 } GameObject;
 
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*));
+void destroy_gameobject(GameObject* object);
 void render_cursor(GameObject*);
-GameObject* instantiate_missile(GLfloat pos[3]);
+GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3]);

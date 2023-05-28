@@ -1,11 +1,6 @@
-﻿  Camera.c
-  Object.c
-  Source.c
+﻿  Source.c
 Y:\GitHub\COMP612_Ass2\Planets\Source.c(122,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
 Y:\GitHub\COMP612_Ass2\Planets\Source.c(123,24): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-  Vector.c
-  Generating Code...
-Y:\GitHub\COMP612_Ass2\Planets\Object.c(15): warning C4716: 'new_object': must return a value
   Planets.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Planets.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied

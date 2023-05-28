@@ -11,7 +11,7 @@ void render_helicopter(GameObject* this)
 {
 	static float proprot = 0.0f; // propeller rotation
 
-	glColor4d(0.8, 0.8, 0.8, 1.0);
+	setMaterialColor(1.0f, 1.0f, 1.0f); // set material color
 
 	glPushMatrix(); // push the body
 

@@ -1,5 +1,6 @@
 #include <freeglut.h>
 #include "Ground.h"
+#include "Misc.h"
 #include <stdio.h>
 
 const int size = 1000;
@@ -13,7 +14,7 @@ void render_ground(void)
 	glPushMatrix();
 
 	// Set the color for the ground plane
-	glColor3f(0.2f, 0.2f, 0.2f);
+	setMaterialColor(0.2f, 0.2f, 0.2f);
 
 	// Draw the ground plane as a grid of quads
 	for (int x = -size; x < size; x++) 
@@ -41,7 +42,7 @@ void test_render(int mode)
 {
 	glPushMatrix();
 
-	glColor3f(0.5f, 0.5f, 0.5f);
+	setMaterialColor(0.5f, 0.5f, 0.5f);
 	
 	glBegin(GL_QUADS);
 	glNormal3f(0, 1, 0);
@@ -58,17 +59,17 @@ void drawOrigin(void)
 {
 	glBegin(GL_LINES);
 	//draw red x axes line from -2.0 to 2.0
-	glColor3f(1.0f, 0.0f, 0.0f);
+	setMaterialColor(1.0f, 0.0f, 0.0f);
 	glVertex3d(-0.0, 0.0, 0.0);
 	glVertex3d(2.0, 0.0, 0.0);
 
 	//draw blue y axes line from -2.0 to 2.0
-	glColor3f(0.0f, 0.0f, 1.0f);
+	setMaterialColor(0.0f, 0.0f, 1.0f);
 	glVertex3d(0.0, 2.0, 0.0);
 	glVertex3d(0.0, -0.0, 0.0);
 
 	//draw green z axes line from -2.0 to 2.0
-	glColor3f(0.0f, 1.0f, 0.0f);
+	setMaterialColor(0.0f, 1.0f, 0.0f);
 	glVertex3d(0.0, 0.0, 2.0);
 	glVertex3d(0.0, 0.0, -0.0);
 
@@ -82,7 +83,7 @@ void render_grid(void)
 	int cellSize = 10;
 	int halfGridSize = gridSize / 2;
 
-	glColor3f(0.0f, 0.0f, 0.0f); // Set grid color
+	setMaterialColor(0.0f, 0.0f, 0.0f); // Set grid color
 
 	glBegin(GL_LINES);
 	for (int i = -halfGridSize; i <= halfGridSize; i += cellSize)

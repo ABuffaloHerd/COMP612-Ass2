@@ -16,7 +16,7 @@ void insert_displaylist(DisplayList* target, void(*instructions)())
 	}
 	else
 	{
-		target->list = (GLuint*)realloc(target->list, target->size + 1);
+		target->list = (GLuint*)realloc(target->list, (target->size + 1) * sizeof(GLuint));
 	}
 
 	target->list[target->size] = glGenLists(1);

@@ -49,7 +49,7 @@ void render_cursor(GameObject* this)
 }
 
 
-GameObject* instantiate_missile(GLfloat pos[3])
+GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3])
 {
 	GameObject* m = (GameObject*)malloc(sizeof(GameObject));
 
@@ -57,27 +57,58 @@ GameObject* instantiate_missile(GLfloat pos[3])
 	m->pos[1] = pos[1];
 	m->pos[2] = pos[2];
 
+	m->rot[0] = rot[0];
+	m->rot[1] = rot[1];
+	m->rot[2] = rot[2];
+
 	m->update = update_missile;
 	m->render = render_missile;
+
+	m->timer = 5 * 120; // 5 seconds at 120fps
+
+	printf("Fox 2!\n");
+	printf("Missile %x: position: %d, %d, %d", m, m->pos[0], m->pos[1], m->pos[2]);
+	return m;
 }
 
 void update_missile(GameObject* missile)
 {
-	static float vel = 10.0f;
-	// calculate forward vector
+	static float vel = 0.0001f;
+	// calculate forward vector TODO: broken
 	float dx = vel * FRAME_TIME_SEC * cos(rad(missile->rot[1]));
 	float dz = vel * FRAME_TIME_SEC * -sin(rad(missile->rot[1]));
 
 	missile->pos[0] += dx;
 	missile->pos[2] += dz;
+
+	missile->timer--;
+
+	printf("Missile %x ", missile);
+	printf("Timer: %d, x: %d, z: %d\n", missile->timer, missile->pos[0], missile->pos[2]);
 }
 
 void render_missile(GameObject* missile)
 {
 	glPushMatrix();
-	glColor3f(1.0f, 1.0f, 0.0f);
+
+	GLfloat yellow[] = {1.0f, 1.0f, 0.0f, 1.0f};
+	
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, yellow);
+	glMaterialfv(GL_FRONT, GL_EMISSION, yellow);
+
+	glRotatef(missile->rot[0], 1, 0, 0);
+	glRotatef(missile->rot[1], 0, 1, 0);
+	glRotatef(missile->rot[2], 0, 0, 1);
 	glTranslatef(missile->pos[0], missile->pos[1], missile->pos[2]);
 	glutSolidTeaspoon(1.0);
 
 	glPopMatrix();
+
+	reset_material_properties();
+}
+
+void destroy_gameobject(GameObject* object)
+{
+	object->render = NULL;
+	object->update = NULL;
 }

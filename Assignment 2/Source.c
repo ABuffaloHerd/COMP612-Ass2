@@ -25,6 +25,7 @@
 #include "SoundSystem.h"
 #include "Texture.h"
 #include "DisplayList.h"
+#include "RenderList.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -223,6 +224,9 @@ float texture_rotation;
 // DIsplay list inator
 DisplayList* displayList;
 
+// Render list inator
+RenderList* renderList;
+
 inline float randf() 
 {
 	return (float)rand() / (float)RAND_MAX;
@@ -310,11 +314,11 @@ void display(void)
 	
 	glMatrixMode(GL_MODELVIEW);
 
-	//render_ground(10);
+	// Render static objects
 	render_displaylist(displayList);
+	renderlist_render(renderList);
+
 	drawOrigin();
-	//render_grid();
-	
 
 	glutSwapBuffers();
 }
@@ -441,7 +445,7 @@ void keyPressed(unsigned char key, int x, int y)
 		break;
 
 	case KEY_FIRE_MISSILE:
-		//instatiate_missile(copter->pos);
+		renderlist_push(renderList, instantiate_missile(copter->pos, copter->rot));
 		break;
 
 	case KEY_RENDER_FILL:
@@ -668,6 +672,9 @@ void init(void)
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
 
+	// Render list 
+	renderList = renderlist_init();
+
 	printf("%d", (int)' ');
 }
 
@@ -703,6 +710,9 @@ void think(void)
 	
 
 	texture_rotation += 50 * FRAME_TIME_SEC;
+
+	// update all interactive objects
+	renderlist_update(renderList);
 
 	/*
 		Keyboard motion handler: complete this section to make your "player-controlled"
@@ -796,7 +806,7 @@ void initLights(void)
 	glEnable(GL_NORMALIZE);
 
 	// Enable use of simple GL colours as materials.
-	glEnable(GL_COLOR_MATERIAL);
+	//glEnable(GL_COLOR_MATERIAL);
 
 	glShadeModel(GL_SMOOTH);
 }
