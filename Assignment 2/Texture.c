@@ -43,6 +43,13 @@ Texture* load_texture(char* filename, char* shortname)
 	//is the file name. There are 3 PPM files you can try out mount03, sky08 and sea02.
 	fileID = fopen(filename, "r");
 
+	if (!fileID)
+	{
+		printf("no file\n");
+		printf("%s", filename);
+	}
+	
+
 	// read in the first header line
 	//    - "%[^\n]"  matches a string of all characters not equal to the new line character ('\n')
 	//    - so we are just reading everything up to the first line break

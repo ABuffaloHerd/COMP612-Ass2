@@ -89,7 +89,7 @@
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
 xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I
-xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
+xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)textures" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +115,7 @@ xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
 xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I
-xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
+xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)textures" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,7 +163,7 @@ xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)textures" /Y /I</Command>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)freeglut\bin\*.dll" "$(TargetDir)" /Y
 xcopy "$(ProjectDir)sfx\*.wav" "$(TargetDir)sfx" /Y /I
-xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)sfx" /Y /I</Command>
+xcopy "$(ProjectDir)textures\*.ppm" "$(TargetDir)textures" /Y /I</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
