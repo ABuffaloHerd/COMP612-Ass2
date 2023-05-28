@@ -9,6 +9,7 @@ extern int renderFillEnabled;
 void render_ground(void)
 {
 	// Save current state
+	printf("renderground has been called\n");
 	glPushMatrix();
 
 	// Set the color for the ground plane

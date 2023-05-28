@@ -161,6 +161,10 @@ cameramotion_t keyboardCameraMotion = { MOTION_NONE, MOTION_NONE };
 #define KEY_ZOOM_OUT		'-'
 
 #define KEY_DEBUG_SOUND		'0'
+#define KEY_TOGGLE_LIGHTING	'1'
+
+#define KEY_FIRE_MISSILE	32 // space
+
 
 // Define all GLUT special keys used for input (add any new key definitions here).
 
@@ -204,6 +208,8 @@ int renderFillEnabled = 1;
 
 // Camera position and orientation. Also a global variable ho ho ho!
 Camera* c;
+
+// copyer
 GameObject* copter;
 GameObject* cursor;
 
@@ -427,7 +433,16 @@ void keyPressed(unsigned char key, int x, int y)
 	case KEY_DEBUG_SOUND:
 		play_sound(SOUND_EXPLODE);
 		break;
+	case KEY_TOGGLE_LIGHTING:
+		if(glIsEnabled(GL_LIGHT1))
+			glDisable(GL_LIGHT1);
+		else
+			glEnable(GL_LIGHT1);
+		break;
 
+	case KEY_FIRE_MISSILE:
+		//instatiate_missile(copter->pos);
+		break;
 
 	case KEY_RENDER_FILL:
 		renderFillEnabled = !renderFillEnabled;
@@ -628,7 +643,14 @@ void idle(void)
  */
 void init(void)
 {
+	// enable things
 	glEnable(GL_DEPTH_TEST);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	//glEnable(GL_FOG);
+
+
 	//glEnable(GL_TEXTURE_2D); // only call when drawing with textures. Textured objects should enable and disable this in their render functions.
 	initLights();
 
@@ -645,6 +667,8 @@ void init(void)
 
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
+
+	printf("%d", (int)' ');
 }
 
 void init_gameobjects(void)
@@ -765,11 +789,16 @@ void initLights(void)
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
+	// LIGHT1 is for spotlight
+	glEnable(GL_LIGHT1);
+
 	// Make GL normalize the normal vectors we supply.
 	glEnable(GL_NORMALIZE);
 
 	// Enable use of simple GL colours as materials.
 	glEnable(GL_COLOR_MATERIAL);
+
+	glShadeModel(GL_SMOOTH);
 }
 
 /******************************************************************************/

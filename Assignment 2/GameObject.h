@@ -11,6 +11,7 @@ inline double rad(double deg)
 
 typedef struct _obj
 {
+	char tag[256]; // 255 characters is plenty
 	GLfloat pos[3];
 	GLfloat rot[3];
 
@@ -24,3 +25,4 @@ typedef struct _obj
 
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*));
 void render_cursor(GameObject*);
+GameObject* instantiate_missile(GLfloat pos[3]);

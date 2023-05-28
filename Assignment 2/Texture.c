@@ -145,6 +145,7 @@ void texture_test(Texture* t)
 	glBegin(GL_QUADS);
 
 	// faff about until it works
+	glNormal3i(0, 1, 0);
 	glTexCoord2i(TOPRIGHT);
 	glVertex3i(5, 1, 5);
 

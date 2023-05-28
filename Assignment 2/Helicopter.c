@@ -86,6 +86,27 @@ void render_helicopter(GameObject* this)
 	glutSolidCube(TEACUP_DIST);
 	glPopMatrix();
 
+	// lights
+	glPushMatrix();
+	//glLoadIdentity(); // hard reset the transformation matrix to make sure the light is in the right fucking position
+
+	// set position of this light
+	GLfloat pos[] = { 0, -0.5f, 0, 1.0f};
+	glLightfv(GL_LIGHT1, GL_POSITION, pos);
+
+	// set the colours
+	GLfloat colour[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, colour);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, colour);
+
+	// set some properties
+	GLfloat down[] = { 0.0f, -1.0f, 0.0f };
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0f);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, down);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 2.0f);
+
+	glPopMatrix();
+
 	glPopMatrix(); // pop the body
 
 	proprot += SPINRATE * FRAME_TIME_SEC; // update rotor angle
