@@ -1,21 +1,17 @@
 ﻿  GameObject.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(7,48): warning C4030: first formal parameter list longer than the second list
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(21,12): warning C4113: 'void (__cdecl *)(GameObject)' differs in parameter lists from 'void (__cdecl *)(_obj *)'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(46,28): warning C4013: 'cos' undefined; assuming extern returning int
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(46,85): warning C4013: 'sin' undefined; assuming extern returning int
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(53,1): warning C4029: declared formal parameter list different from definition
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'GameObject *'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'double'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 3 has type 'double'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 4 has type 'double'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(86,9): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'GameObject *'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(87,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'double'
-Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(87,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 3 has type 'double'
-  Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
-  Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(7,48): warning C4030: first formal parameter list longer than the second list
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(21,12): warning C4113: 'void (__cdecl *)(GameObject)' differs in parameter lists from 'void (__cdecl *)(_obj *)'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(46,51): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(46,108): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(53,1): warning C4029: declared formal parameter list different from definition
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'GameObject *'
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(77,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(78,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
+  C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
-  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\explode.wav
-  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\explode.wav
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
   2 File(s) copied
-  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
+  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\textures\trollface.ppm
   1 File(s) copied

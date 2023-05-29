@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "Texture.h"
 #include "Misc.h"
+#include <math.h>
 
 inline double rad(double deg)
 {

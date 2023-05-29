@@ -1,5 +1,5 @@
 #include "GameObject.h"
-
+#define VELOCITY 50.0f * -1
 extern const float FRAME_TIME_SEC;
 
 void update_missile(GameObject* missile);
@@ -64,43 +64,42 @@ GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3])
 	m->update = update_missile;
 	m->render = render_missile;
 
-	m->timer = 5 * 120; // 5 seconds at 120fps
+	m->timer = 2 * 120; // 5 seconds at 120fps
 
 	printf("Fox 2!\n");
-	printf("Missile %x: position: %d, %d, %d", m, m->pos[0], m->pos[1], m->pos[2]);
+	printf("Missile %x: position: %f, %f, %f", m, m->pos[0], m->pos[1], m->pos[2]);
+	printf("Supplied positions: %f, %f, %f", pos[0], pos[1], pos[2]);
 	return m;
 }
 
 void update_missile(GameObject* missile)
 {
-	static float vel = 0.0001f;
-	// calculate forward vector TODO: broken
-	float dx = vel * FRAME_TIME_SEC * cos(rad(missile->rot[1]));
-	float dz = vel * FRAME_TIME_SEC * -sin(rad(missile->rot[1]));
+	float dx = VELOCITY * FRAME_TIME_SEC * -cos(rad(missile->rot[1]));
+	float dz = VELOCITY * FRAME_TIME_SEC * sin(rad(missile->rot[1]));
 
 	missile->pos[0] += dx;
 	missile->pos[2] += dz;
 
 	missile->timer--;
 
-	printf("Missile %x ", missile);
-	printf("Timer: %d, x: %d, z: %d\n", missile->timer, missile->pos[0], missile->pos[2]);
+	//printf("Missile %x ", missile);
+	//printf("Timer: %d, x: %d, z: %d\n", missile->timer, missile->pos[0], missile->pos[2]);
 }
 
 void render_missile(GameObject* missile)
 {
-	glPushMatrix();
 
 	GLfloat yellow[] = {1.0f, 1.0f, 0.0f, 1.0f};
 	
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, yellow);
 	glMaterialfv(GL_FRONT, GL_EMISSION, yellow);
 
-	glRotatef(missile->rot[0], 1, 0, 0);
-	glRotatef(missile->rot[1], 0, 1, 0);
-	glRotatef(missile->rot[2], 0, 0, 1);
+	glPushMatrix();
 	glTranslatef(missile->pos[0], missile->pos[1], missile->pos[2]);
-	glutSolidTeaspoon(1.0);
+	glRotatef(missile->rot[0], 1, 0, 0);
+	glRotatef(missile->rot[1] - 90, 0, 1, 0);
+	glRotatef(missile->rot[2], 0, 0, 1);
+	glutSolidTeaspoon(3);
 
 	glPopMatrix();
 

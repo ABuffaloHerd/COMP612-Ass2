@@ -3,7 +3,7 @@
 #include "Misc.h"
 #include <stdio.h>
 
-const int size = 1000;
+const int size = 100;
 const int quadSize = 1;
 extern int renderFillEnabled;
 
