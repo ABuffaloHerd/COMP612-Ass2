@@ -39,6 +39,8 @@ Texture* load_texture(char* filename, char* shortname)
 	// temporary variables for reading in the red, green and blue data of each pixel
 	int red, green, blue;
 
+	GLubyte* image;
+
 	// open the image file for reading - note this is hardcoded would be better to provide a parameter which
 	//is the file name. There are 3 PPM files you can try out mount03, sky08 and sea02.
 	fileID = fopen(filename, "r");
@@ -94,7 +96,7 @@ Texture* load_texture(char* filename, char* shortname)
 	totalPixels = this->width * this->height;
 
 	// allocate enough memory for the image  (3*) because of the RGB data
-	this->image = malloc(3 * sizeof(GLuint) * totalPixels);
+	image = malloc(3 * sizeof(GLuint) * totalPixels);
 
 
 	// determine the scaling for RGB values
@@ -111,9 +113,9 @@ Texture* load_texture(char* filename, char* shortname)
 			fscanf(fileID, "%d %d %d", &red, &green, &blue);
 
 			// store the red, green and blue data of the current pixel in the data array
-			this->image[3 * totalPixels - 3 * i - 3] = red;
-			this->image[3 * totalPixels - 3 * i - 2] = green;
-			this->image[3 * totalPixels - 3 * i - 1] = blue;
+			image[3 * totalPixels - 3 * i - 3] = red;
+			image[3 * totalPixels - 3 * i - 2] = green;
+			image[3 * totalPixels - 3 * i - 1] = blue;
 		}
 	}
 	else  // need to scale up the data values
@@ -124,9 +126,9 @@ Texture* load_texture(char* filename, char* shortname)
 			fscanf(fileID, "%d %d %d", &red, &green, &blue);
 
 			// store the red, green and blue data of the current pixel in the data array
-			this->image[3 * totalPixels - 3 * i - 3] = red * RGBScaling;
-			this->image[3 * totalPixels - 3 * i - 2] = green * RGBScaling;
-			this->image[3 * totalPixels - 3 * i - 1] = blue * RGBScaling;
+			image[3 * totalPixels - 3 * i - 3] = red * RGBScaling;
+			image[3 * totalPixels - 3 * i - 2] = green * RGBScaling;
+			image[3 * totalPixels - 3 * i - 1] = blue * RGBScaling;
 		}
 	}
 
@@ -136,12 +138,12 @@ Texture* load_texture(char* filename, char* shortname)
 
 	// TODO: set these via members from the struct
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, this->width, this->height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->image);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, this->width, this->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 
 	// close the image file
 	fclose(fileID);
 
-	// TODO: Test freeing this->image
+	free(image);
 	return this;
 }
 

@@ -1,12 +1,8 @@
-﻿  GameObject.c
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(7,48): warning C4030: first formal parameter list longer than the second list
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(21,12): warning C4113: 'void (__cdecl *)(GameObject)' differs in parameter lists from 'void (__cdecl *)(_obj *)'
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(46,51): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(46,108): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(53,1): warning C4029: declared formal parameter list different from definition
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(70,9): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'GameObject *'
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(77,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\GameObject.c(78,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Texture.c
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(103,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(129,45): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(130,47): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(131,46): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
   Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
   C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied

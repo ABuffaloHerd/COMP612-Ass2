@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#define VELOCITY 50.0f * -1
+#define VELOCITY 90.0f * -1
 extern const float FRAME_TIME_SEC;
 
 void update_missile(GameObject* missile);
@@ -78,6 +78,7 @@ void update_missile(GameObject* missile)
 	float dz = VELOCITY * FRAME_TIME_SEC * sin(rad(missile->rot[1]));
 
 	missile->pos[0] += dx;
+	missile->pos[1] -= 20.0f * FRAME_TIME_SEC;
 	missile->pos[2] += dz;
 
 	missile->timer--;
