@@ -1,13 +1,20 @@
-﻿  Texture.c
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(103,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(129,45): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(130,47): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
-C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\Texture.c(131,46): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
-  Assignment 2.vcxproj -> C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\Debug\Assignment 2.exe
-  C:\Users\aclh2\Source\Repos\ABuffaloHerd\COMP612-Ass2\freeglut\bin\freeglut.dll
+﻿  Ground.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(18,61): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'GLuint *'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(18,46): warning C4024: 'glBindTexture': different types for formal and actual parameter 2
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(97,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(97,32): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(98,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(98,31): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(101,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(101,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(102,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(102,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+  Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
+  Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
-  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\explode.wav
-  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
+  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\explode.wav
+  Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
   2 File(s) copied
-  C:\Users\aclh2\source\repos\ABuffaloHerd\COMP612-Ass2\Assignment 2\textures\trollface.ppm
-  1 File(s) copied
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\ground.ppm
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
+  2 File(s) copied

@@ -2,40 +2,43 @@
 #include "Ground.h"
 #include "Misc.h"
 #include <stdio.h>
+#include "Texture.h"
 
 const int size = 100;
-const int quadSize = 1;
+const int quadSize = 10;
 extern int renderFillEnabled;
 
 void render_ground(void)
 {
-	// Save current state
 	printf("renderground has been called\n");
-	glPushMatrix();
 
-	// Set the color for the ground plane
-	setMaterialColor(0.2f, 0.2f, 0.2f);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, textureRegistry[TEXTURE_TROLL]);
+	//glBindTexture(GL_TEXTURE_2D, 0); 
 
-	// Draw the ground plane as a grid of quads
-	for (int x = -size; x < size; x++) 
-	{
-		for (int z = -size; z < size; z++) 
-		{
-			glBegin(GL_QUADS);
-			glNormal3i(0, 1, 0);
-			glVertex3f(x * quadSize, 0, z * quadSize);
-			glNormal3i(0, 1, 0);
-			glVertex3f(x * quadSize, 0, (z + 1) * quadSize);
-			glNormal3i(0, 1, 0);
-			glVertex3f((x + 1) * quadSize, 0, (z + 1) * quadSize);
-			glNormal3i(0, 1, 0);
-			glVertex3f((x + 1) * quadSize, 0, z * quadSize);
-			glEnd();
-		}
-	}
+	glBegin(GL_QUADS);
+	int x = 1;
+	int z = 1;
 
-	// Restore previous state
-	glPopMatrix();
+		glNormal3i(0, 1, 0);
+		glTexCoord2i(TOPRIGHT);
+		glVertex3i(5, 0, 5);
+
+		glNormal3i(0, 1, 0);
+		glTexCoord2i(TOPLEFT);
+		glVertex3i(-5, 0, 5);
+
+		glNormal3i(0, 1, 0);
+		glTexCoord2i(BOTTOMLEFT);
+		glVertex3i(-5, 0, -5);
+
+		glNormal3i(0, 1, 0);
+		glTexCoord2i(BOTTOMRIGHT);
+		glVertex3i(5, 0, -5);
+
+	glEnd();
+
+	glDisable(GL_TEXTURE_2D);
 }
 
 void test_render(int mode)

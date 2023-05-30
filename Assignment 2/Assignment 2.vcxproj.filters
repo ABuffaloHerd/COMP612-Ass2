@@ -45,6 +45,9 @@
     <ClCompile Include="RenderList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StaticObjects.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ground.h">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RenderList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObjects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

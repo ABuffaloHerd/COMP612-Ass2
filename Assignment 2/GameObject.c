@@ -83,6 +83,11 @@ void update_missile(GameObject* missile)
 
 	missile->timer--;
 
+	if (missile->pos[1] <= 0)
+	{
+		play_sound(SOUND_EXPLODE);
+	}
+
 	//printf("Missile %x ", missile);
 	//printf("Timer: %d, x: %d, z: %d\n", missile->timer, missile->pos[0], missile->pos[2]);
 }

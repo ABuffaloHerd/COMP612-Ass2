@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "Texture.h"
+#include "SoundSystem.h"
 #include "Misc.h"
 #include <math.h>
 

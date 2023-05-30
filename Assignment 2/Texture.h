@@ -3,19 +3,35 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include "Misc.h"
 
 #define MAXNAME 256
+#define MAXTEXTURES 256 // 256 texture slots
+
+// Texture coordinate macros
+#define TOPRIGHT 1, 1
+#define TOPLEFT 0, 1
+#define BOTTOMLEFT 0, 0
+#define BOTTOMRIGHT 1, 0
+
 
 typedef struct _tex
 {
-	char filename[MAXNAME]; // TODO: is this needed?
-	char shortname[MAXNAME]; // for linkedlist
 	GLubyte* image;
 
 	GLuint ID;
 	int width, height;
 } Texture;
 
-Texture* load_texture(char*, char*);
+typedef enum _texname
+{
+	TEXTURE_GROUND = 0,
+	TEXTURE_TROLL = 1,
+	TEXTURE_COUNT // not a texture
+} TextureType;
 
+static GLuint* textureRegistry[MAXTEXTURES];
+
+void init_textures(void);
+GLuint load_texture_RGB(char*);
 void texture_test(Texture*);

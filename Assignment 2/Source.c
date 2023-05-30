@@ -309,7 +309,7 @@ void display(void)
 	cursor->render(cursor);
 
 	// Texture test
-	texture_test(trollface);
+	//texture_test(trollface);
 
 
 	// Render static objects
@@ -659,18 +659,15 @@ void init(void)
 	glClearColor(0.98, 0.373, 0.333, 1.0); // set background colour to sunset orange #FA5F55
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
 
-	play_sound(SOUND_MIDI);
-
-	trollface = load_texture("textures/trollface.ppm", "trollface");
-	texture_rotation = 0.0f;
+	init_textures();
 
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
+	insert_displaylist(displayList, texture_test);
 
 	// Render list 
 	renderList = renderlist_init();
-
-	printf("%d", (int)' ');
+	
 }
 
 void init_gameobjects(void)
