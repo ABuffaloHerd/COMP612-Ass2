@@ -11,6 +11,8 @@ void render_helicopter(GameObject* this)
 {
 	static float proprot = 0.0f; // propeller rotation
 
+	reset_material_properties();
+
 	setMaterialColor(1.0f, 1.0f, 1.0f); // set material color
 
 	glPushMatrix(); // push the body
@@ -21,6 +23,11 @@ void render_helicopter(GameObject* this)
 	glRotatef(this->rot[0], 1, 0, 0);
 	glRotatef(this->rot[1], 0, 1, 0);
 	glRotatef(this->rot[2], 0, 0, 1);
+
+	// shiny ass teapot
+	GLfloat teapotcolour[] = { 0.0f, 0.8f, 1.0f, 1.0f };
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, teapotcolour);
+	glMaterialf(GL_FRONT, GL_SHININESS, 100.0f);
 
 	glutSolidTeapot(COPTER_SCALE);
 
@@ -108,6 +115,8 @@ void render_helicopter(GameObject* this)
 	glPopMatrix();
 
 	glPopMatrix(); // pop the body
+
+	reset_material_properties();
 
 	proprot += SPINRATE * FRAME_TIME_SEC; // update rotor angle
 }

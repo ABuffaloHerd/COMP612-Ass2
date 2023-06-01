@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996) // FUCKING COMPILE
 
+extern GLuint textureRegistry[256];
 
 GLuint load_texture_RGB(char* filename)
 {
@@ -126,14 +127,30 @@ GLuint load_texture_RGB(char* filename)
 	}
 
 	// now we are ready to call the OpenGL functions to generate the texture
-	glGenTextures(1, &(ID));
+	glGenTextures(1, &ID);
+		
+	// fuck you
+	GLenum fucker = glGetError();
+	printf("Error: %s", gluErrorString(fucker));
+
 	glBindTexture(GL_TEXTURE_2D, ID);
 
+#ifdef MIPMAPS
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+#else
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#endif
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // repeat texture in x direction
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // repeat texture in y direction
+
+#ifdef MIPMAPS
+	gluBuild2DMipmaps(GL_TEXTURE_2D, MIPMAP_LEVELS, width, height, GL_RGB, GL_UNSIGNED_BYTE, image);
+#else
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+#endif
 
 	// close the image file
 	fclose(fileID);
@@ -268,13 +285,28 @@ GLuint load_texture_RGBA(char* filename)
 
 	// now we are ready to call the OpenGL functions to generate the texture
 	glGenTextures(1, &ID);
+	// fuck you
+	GLenum fucker = glGetError();
+	printf("Error: %s", gluErrorString(fucker));
+
 	glBindTexture(GL_TEXTURE_2D, ID);
 
+#ifdef MIPMAPS
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+#else
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#endif
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // repeat texture in x direction
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // repeat texture in y direction
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+#ifdef MIPMAPS
+	gluBuild2DMipmaps(GL_TEXTURE_2D, MIPMAP_LEVELS, width, height, GL_RGBA, GL_UNSIGNED_BYTE, image);
+#else
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+#endif
 
 	// close the image file
 	fclose(fileID);
@@ -288,6 +320,11 @@ void init_textures(void)
 	// load all textures into the registry
 	textureRegistry[TEXTURE_TROLL] = load_texture_RGB("textures/trollface.ppm");
 	textureRegistry[TEXTURE_GROUND] = load_texture_RGB("textures/ground.ppm");
+	textureRegistry[TEXTURE_KYS] = load_texture_RGB("textures/kys.ppm");
+	textureRegistry[TEXTURE_ARMSTRONG] = load_texture_RGB("textures/armstrong.ppm");
+	textureRegistry[TEXTURE_JONADAM] = load_texture_RGB("textures/jon-adam-stare.ppm");
+	textureRegistry[TEXTURE_FRING] = load_texture_RGB("textures/fring1.ppm");
+	show_texture_registry();
 
 	printf("Textures initialized\n");
 }
@@ -295,7 +332,9 @@ void init_textures(void)
 void texture_test(void)
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureRegistry[TEXTURE_TROLL]);
+	glBindTexture(GL_TEXTURE_2D, textureRegistry[TEXTURE_FRING]);
+	printf("Texture test function\n");
+	show_texture_registry();
 	glBegin(GL_QUADS);
 
 	// faff about until it works
@@ -316,5 +355,17 @@ void texture_test(void)
 	glVertex3i(5, 1, -5);
 
 	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
+}
+
+// because binding textures outside of this file breaks
+void bind_texture(TextureType fuckinwork)
+{
+	glBindTexture(GL_TEXTURE_2D, textureRegistry[fuckinwork]);
+}
+
+void unbind_texture(void)
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

@@ -14,6 +14,7 @@
  ******************************************************************************/
 #define _CRT_SECURE_NO_WARNINGS // i am on my knees begging for a buffer overflow
 #pragma warning(disable:4996) // FUCKING LET ME COMPILE YOU PIECE OF SHITA
+
 #include <Windows.h>
 #include <freeglut.h>
 #include <math.h>
@@ -26,6 +27,7 @@
 #include "Texture.h"
 #include "DisplayList.h"
 #include "RenderList.h"
+#include "StaticObjects.h"
  /******************************************************************************
   * Animation & Timing Setup
   ******************************************************************************/
@@ -196,6 +198,7 @@ void think(void);
 void initLights(void);
 
 void init_gameobjects(void);
+void fogger(void);
 
 // DEFINITIONS OF DISTANCE
 #define METER 1.0 // 1m = 1.0 glunits
@@ -647,7 +650,7 @@ void init(void)
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	//glEnable(GL_FOG);
+	//fogger(); // enable fog
 
 
 	//glEnable(GL_TEXTURE_2D); // only call when drawing with textures. Textured objects should enable and disable this in their render functions.
@@ -664,22 +667,39 @@ void init(void)
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
 	insert_displaylist(displayList, texture_test);
+	insert_displaylist(displayList, render_sun);
+	insert_displaylist(displayList, render_gigantic_gus_fring);
 
 	// Render list 
 	renderList = renderlist_init();
-	
+
+	GLfloat testpos[] = { 4.0f, 0.0f, 8.0f };
+	renderlist_push(renderList, trollface_cylinder(testpos));
 }
 
 void init_gameobjects(void)
 {
 	c = new_camera();
+	c->locked = 1; // lock camera at the start
+
 	copter = new_gameobject(render_helicopter, 0);
 	cursor = new_gameobject(render_cursor, 0);
-
-	// stare at the copter by default
-	copter = copter;
+	
+	copter->pos[1] = 5; // set helicopter to hover 5 units above ground
 }
 
+void fogger(void)
+{
+	glEnable(GL_FOG);
+
+	GLfloat fogColor[4] = { 0.98, 0.373, 0.333, 1.0 };
+	glFogi(GL_FOG_MODE, GL_EXP2);
+	glFogfv(GL_FOG_COLOR, fogColor);
+	glFogf(GL_FOG_DENSITY, 0.005);
+	glFogf(GL_FOG_START, 5.0);
+	glFogf(GL_FOG_END, 20.0);
+
+}
 /*
 	Advance our animation by FRAME_TIME milliseconds.
 
@@ -778,16 +798,17 @@ void think(void)
 void initLights(void)
 {
 	// Simple lighting setup
-	GLfloat globalAmbient[] = { 0.4f, 0.4f, 0.4f, 1 };
-	GLfloat lightPosition[] = { 5.0f, 5.0f, 5.0f, 1.0f };
-	GLfloat ambientLight[] = { 0, 0, 0, 1 };
-	GLfloat diffuseLight[] = { 1, 1, 1, 1 };
-	GLfloat specularLight[] = { 1, 1, 1, 1 };
+	GLfloat globalAmbient[] = { 0.98f * 0.4f, 0.373f * 0.4f, 0.333f * 0.4f, 1.0f };
 
 	// Configure global ambient lighting.
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbient);
 
-	// Configure Light 0.
+	// Configure Light 0 as directional lighting (e.g. the sun).
+	GLfloat lightPosition[] = { 1.0f, 0.5f, 1.0f, 0.0f };
+	GLfloat ambientLight[] = { 0, 0, 0, 1 };
+	GLfloat diffuseLight[] = { 1, 1, 1, 1 };
+	GLfloat specularLight[] = { 1, 1, 1, 1 };
+
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
@@ -799,6 +820,7 @@ void initLights(void)
 
 	// LIGHT1 is for spotlight
 	glEnable(GL_LIGHT1);
+	glLighti(GL_LIGHT1, GL_SPOT_EXPONENT, 96); // smoothen out the spotlight
 
 	// Make GL normalize the normal vectors we supply.
 	glEnable(GL_NORMALIZE);

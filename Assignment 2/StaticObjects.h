@@ -6,3 +6,9 @@
 #include "DisplayList.h"
 #include "Texture.h"
 #include <freeglut.h>
+#include "Misc.h"
+#include "GameObject.h"
+
+void render_sun(void);
+void render_gigantic_gus_fring(void);
+GameObject* trollface_cylinder(GLfloat pos[3]);

@@ -65,6 +65,7 @@ GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3])
 	m->render = render_missile;
 
 	m->timer = 2 * 120; // 5 seconds at 120fps
+	m->isTimed = 1;
 
 	printf("Fox 2!\n");
 	printf("Missile %x: position: %f, %f, %f", m, m->pos[0], m->pos[1], m->pos[2]);
@@ -86,6 +87,7 @@ void update_missile(GameObject* missile)
 	if (missile->pos[1] <= 0)
 	{
 		play_sound(SOUND_EXPLODE);
+		missile->timer = 0;
 	}
 
 	//printf("Missile %x ", missile);
@@ -111,6 +113,7 @@ void render_missile(GameObject* missile)
 
 	reset_material_properties();
 }
+
 
 void destroy_gameobject(GameObject* object)
 {

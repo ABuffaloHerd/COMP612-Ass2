@@ -24,6 +24,7 @@ typedef struct _obj
 	void(*update)(struct _obj*);
 
 	unsigned int timer;
+	unsigned int isTimed;
 } GameObject;
 
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*));

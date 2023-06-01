@@ -1,20 +1,15 @@
-﻿  Ground.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(18,61): warning C4047: 'function': 'GLuint' differs in levels of indirection from 'GLuint *'
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(18,46): warning C4024: 'glBindTexture': different types for formal and actual parameter 2
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(97,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(97,32): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(98,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(98,31): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(101,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(101,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(102,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
-Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(102,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+﻿  StaticObjects.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\StaticObjects.c(88): warning C4716: 'trollface_cylinder': must return a value
   Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
   Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\explode.wav
   Y:\GitHub\COMP612_Ass2\Assignment 2\sfx\scarymonsternicespritemidi.wav
   2 File(s) copied
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\armstrong.ppm
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\fring1.ppm
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\ground.ppm
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\jon-adam-stare.ppm
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\kys.ppm
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
-  2 File(s) copied
+  6 File(s) copied

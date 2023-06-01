@@ -51,7 +51,7 @@ void renderlist_update(RenderList* list)
 			object->update(object);
 		}
 
-		if (object->timer == 0)
+		if (object->timer == 0 && object->isTimed)
 		{
 			destroy_gameobject(object);
 			free(object);

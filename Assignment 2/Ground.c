@@ -5,37 +5,40 @@
 #include "Texture.h"
 
 const int size = 100;
-const int quadSize = 10;
+const int quadSize = 5;
 extern int renderFillEnabled;
 
 void render_ground(void)
 {
-	printf("renderground has been called\n");
-
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureRegistry[TEXTURE_TROLL]);
-	//glBindTexture(GL_TEXTURE_2D, 0); 
+	bind_texture(TEXTURE_GROUND);
 
 	glBegin(GL_QUADS);
-	int x = 1;
-	int z = 1;
+	for (int x = -size; x < size; x++) 
+	{
+		for (int z = -size; z < size; z++) 
+		{
+			// Bottom Left vertex
+			glTexCoord2i(0, 0);
+			glNormal3i(0, 1, 0);
+			glVertex3f(x * quadSize, 0, z * quadSize);
 
-		glNormal3i(0, 1, 0);
-		glTexCoord2i(TOPRIGHT);
-		glVertex3i(5, 0, 5);
+			// Top Left vertex
+			glTexCoord2i(0, 1);
+			glNormal3i(0, 1, 0);
+			glVertex3f(x * quadSize, 0, (z + 1) * quadSize);
 
-		glNormal3i(0, 1, 0);
-		glTexCoord2i(TOPLEFT);
-		glVertex3i(-5, 0, 5);
+			// Top Right vertex
+			glTexCoord2i(1, 1);
+			glNormal3i(0, 1, 0);
+			glVertex3f((x + 1) * quadSize, 0, (z + 1) * quadSize);
 
-		glNormal3i(0, 1, 0);
-		glTexCoord2i(BOTTOMLEFT);
-		glVertex3i(-5, 0, -5);
-
-		glNormal3i(0, 1, 0);
-		glTexCoord2i(BOTTOMRIGHT);
-		glVertex3i(5, 0, -5);
-
+			// Bottom Right vertex
+			glTexCoord2i(1, 0);
+			glNormal3i(0, 1, 0);
+			glVertex3f((x + 1) * quadSize, 0, z * quadSize);
+		}
+	}
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
