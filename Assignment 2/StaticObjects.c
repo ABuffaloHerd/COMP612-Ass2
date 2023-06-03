@@ -14,7 +14,7 @@ void render_gigantic_gus_fring(void)
 	glEnable(GL_TEXTURE_2D);
 	bind_texture(TEXTURE_FRING);
 
-	glTranslatef(100.0f, 10.0f, 0.0f);
+	glTranslatef(100.0f, 50.0f, 0.0f);
 
 	// rotate to face cam
 	glRotatef(90, 1, 0, 0);
@@ -51,20 +51,22 @@ void render_sun(void)
 {
 	reset_material_properties();
 
+	glDisable(GL_FOG); // this magic trick only works if fog is enabled, but makes the sun fully visible
 	glPushMatrix();
 
 	GLfloat sun_color[] = { 1.0f, 0.8f, 0.0f, 1.0f };
 	GLfloat emmission[] = { 1.0f, 1.0f, 0.0f, 1.0f };
-	GLfloat sun_position[] = { 0.0f, 100.0f, 300.0f };
+	GLfloat sun_position[] = { 0.0f, 60.0f, 550.0f };
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, sun_color);
 	glMaterialfv(GL_FRONT, GL_EMISSION, emmission);
 	glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
 
 	glTranslatef(sun_position[0], sun_position[1], sun_position[2]);
-	glutSolidSphere(10.0f, 20, 20);
+	glutSolidSphere(25.0f, 20, 20);
 
 	glPopMatrix();
+	glEnable(GL_FOG);
 }
 
 GameObject* trollface_cylinder(GLfloat pos[3])
@@ -132,7 +134,6 @@ void render_cylinder(GameObject* cylinder)
 	gluDisk(qobj, 0, CYLINDER_RADIUS, 20, 20);
 	glPopMatrix();
 
-	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 	gluDeleteQuadric(qobj);
 }

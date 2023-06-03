@@ -1,5 +1,5 @@
 ﻿  StaticObjects.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\StaticObjects.c(88): warning C4716: 'trollface_cylinder': must return a value
+Y:\GitHub\COMP612_Ass2\Assignment 2\StaticObjects.c(90): warning C4716: 'trollface_cylinder': must return a value
   Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied

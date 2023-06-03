@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include "Texture.h"
 
-const int size = 100;
-const int quadSize = 5;
 extern int renderFillEnabled;
 
 void render_ground(void)
@@ -14,29 +12,29 @@ void render_ground(void)
 	bind_texture(TEXTURE_GROUND);
 
 	glBegin(GL_QUADS);
-	for (int x = -size; x < size; x++) 
+	for (int x = -GROUNDSIZE; x < GROUNDSIZE; x++) 
 	{
-		for (int z = -size; z < size; z++) 
+		for (int z = -GROUNDSIZE; z < GROUNDSIZE; z++) 
 		{
 			// Bottom Left vertex
 			glTexCoord2i(0, 0);
 			glNormal3i(0, 1, 0);
-			glVertex3f(x * quadSize, 0, z * quadSize);
+			glVertex3f(x * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
 
 			// Top Left vertex
 			glTexCoord2i(0, 1);
 			glNormal3i(0, 1, 0);
-			glVertex3f(x * quadSize, 0, (z + 1) * quadSize);
+			glVertex3f(x * GROUND_QUADSIZE, 0, (z + 1) * GROUND_QUADSIZE);
 
 			// Top Right vertex
 			glTexCoord2i(1, 1);
 			glNormal3i(0, 1, 0);
-			glVertex3f((x + 1) * quadSize, 0, (z + 1) * quadSize);
+			glVertex3f((x + 1) * GROUND_QUADSIZE, 0, (z + 1) * GROUND_QUADSIZE);
 
 			// Bottom Right vertex
 			glTexCoord2i(1, 0);
 			glNormal3i(0, 1, 0);
-			glVertex3f((x + 1) * quadSize, 0, z * quadSize);
+			glVertex3f((x + 1) * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
 		}
 	}
 	glEnd();

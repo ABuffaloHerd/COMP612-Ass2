@@ -18,6 +18,7 @@
 #include <Windows.h>
 #include <freeglut.h>
 #include <math.h>
+#include <time.h>q
 
 #include "Ground.h"
 #include "Camera.h"
@@ -199,6 +200,7 @@ void initLights(void);
 
 void init_gameobjects(void);
 void fogger(void);
+void init_cylinders(void);
 
 // DEFINITIONS OF DISTANCE
 #define METER 1.0 // 1m = 1.0 glunits
@@ -310,10 +312,6 @@ void display(void)
 	// render objects
 	copter->render(copter);
 	cursor->render(cursor);
-
-	// Texture test
-	//texture_test(trollface);
-
 
 	// Render static objects
 	render_displaylist(displayList);
@@ -650,8 +648,10 @@ void init(void)
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	//fogger(); // enable fog
+	fogger(); // enable fog
 
+	// seed random
+	srand(time(0));
 
 	//glEnable(GL_TEXTURE_2D); // only call when drawing with textures. Textured objects should enable and disable this in their render functions.
 	initLights();
@@ -666,15 +666,16 @@ void init(void)
 
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
-	insert_displaylist(displayList, texture_test);
+	//insert_displaylist(displayList, texture_test);
 	insert_displaylist(displayList, render_sun);
 	insert_displaylist(displayList, render_gigantic_gus_fring);
 
 	// Render list 
 	renderList = renderlist_init();
+	init_cylinders();
 
-	GLfloat testpos[] = { 4.0f, 0.0f, 8.0f };
-	renderlist_push(renderList, trollface_cylinder(testpos));
+	GameObject* bus = new_gameobject(render_bus, update_bus);
+	renderlist_push(renderList, bus);
 }
 
 void init_gameobjects(void)
@@ -686,6 +687,23 @@ void init_gameobjects(void)
 	cursor = new_gameobject(render_cursor, 0);
 	
 	copter->pos[1] = 5; // set helicopter to hover 5 units above ground
+}
+
+// define how dense the cylinders are
+#define POSMAX 800
+void init_cylinders(void)
+{
+	GLfloat pos[3];
+	for (int i = 0; i < 100; i++)
+	{
+		pos[0] = randf() * POSMAX - (POSMAX / 2);
+		pos[1] = 0;
+		pos[2] = randf() * POSMAX - (POSMAX / 2);
+		
+		GameObject* cylinder = trollface_cylinder(pos);
+		cylinder->rot[2] = rand() % 360;
+		renderlist_push(renderList, cylinder);
+	}
 }
 
 void fogger(void)

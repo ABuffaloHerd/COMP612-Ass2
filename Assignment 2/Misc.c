@@ -31,3 +31,9 @@ void show_texture_registry(void)
     printf("ID: %d \t Trollface\n", textureRegistry[0]);
     printf("ID: %d \t ground\n", textureRegistry[1]);
 }
+
+void print_error(void)
+{
+    GLenum fuck = glGetError();
+    printf("%s", gluErrorString(fuck));
+}

@@ -1,4 +1,5 @@
 #include "GameObject.h"
+
 #define VELOCITY 90.0f * -1
 extern const float FRAME_TIME_SEC;
 
@@ -68,8 +69,6 @@ GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3])
 	m->isTimed = 1;
 
 	printf("Fox 2!\n");
-	printf("Missile %x: position: %f, %f, %f", m, m->pos[0], m->pos[1], m->pos[2]);
-	printf("Supplied positions: %f, %f, %f", pos[0], pos[1], pos[2]);
 	return m;
 }
 
@@ -96,7 +95,6 @@ void update_missile(GameObject* missile)
 
 void render_missile(GameObject* missile)
 {
-
 	GLfloat yellow[] = {1.0f, 1.0f, 0.0f, 1.0f};
 	
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, yellow);
@@ -114,6 +112,76 @@ void render_missile(GameObject* missile)
 	reset_material_properties();
 }
 
+void update_bus(GameObject* bus)
+{
+	// Yeah, this thing moves at 10m/s 
+	bus->pos[0] += 10 * FRAME_TIME_SEC;
+
+	// This is a genuine magic number, i have no fucking clue why it's 5 or how that relates to the size of the ground plane. I just know it works.
+	if(bus->pos[0] > GROUNDSIZE * 5)
+		bus->pos[0] = -GROUNDSIZE * 5;
+}
+
+// this is one depressing bus
+void render_bus(GameObject* bus)
+{
+	// auckland transport coloured bus
+	GLfloat navyblue[] = { 0.00, 0.05, 0.530 , 1.0f };
+	GLfloat black[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	reset_material_properties();
+
+	// Goto bus position
+	glPushMatrix();
+
+		glTranslatef(bus->pos[0], bus->pos[1], bus->pos[2]);
+		glRotatef(bus->rot[0], 1, 0, 0);
+		glRotatef(bus->rot[1], 0, 1, 0);
+		glRotatef(bus->rot[2], 0, 0, 1);
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, navyblue);
+		glMaterialfv(GL_FRONT, GL_EMISSION, navyblue); // make it glow cause that's what copilot suggested
+
+		// full model facelift
+		glTranslatef(0.0f, 0.8f, 0.0f);
+
+		// draw the bus
+		// long rectangle
+		glPushMatrix();
+
+		// lift it up a bit
+		glTranslatef(0.0f, 2.2f, 0.0f);
+			glScalef(3.0f, 1.0f, 1.0f);
+			glutSolidCube(4);
+		glPopMatrix();
+
+		// draw the wheels as two pathetic black cylinders
+
+		// move to the side to draw the wheels
+		glTranslatef(0.0f, 0.0f, -2.5f);
+		// goto front wheels
+		glPushMatrix();
+			
+			// move forward
+			glTranslatef(3.0f, 0.0f, 0.0f);
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, black);
+			glMaterialfv(GL_FRONT, GL_EMISSION, black);
+			glutSolidCylinder(0.8f, 5.0f, 10, 10);
+
+		glPopMatrix();
+
+		//// goto back wheels
+		glPushMatrix();
+
+			glTranslatef(-3.0f, 0.0f, 0.0f);
+			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, black);
+			glMaterialfv(GL_FRONT, GL_EMISSION, black);
+			glutSolidCylinder(0.8f, 5.0f, 10, 10);
+
+		glPopMatrix();
+	
+	glPopMatrix();
+}
 
 void destroy_gameobject(GameObject* object)
 {
