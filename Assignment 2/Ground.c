@@ -16,30 +16,62 @@ void render_ground(void)
 	{
 		for (int z = -GROUNDSIZE; z < GROUNDSIZE; z++) 
 		{
-			// Bottom Left vertex
-			glTexCoord2i(0, 0);
+			// Bottom Right vertex
+			glTexCoord2i(1, 0);
 			glNormal3i(0, 1, 0);
-			glVertex3f(x * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
-
-			// Top Left vertex
-			glTexCoord2i(0, 1);
-			glNormal3i(0, 1, 0);
-			glVertex3f(x * GROUND_QUADSIZE, 0, (z + 1) * GROUND_QUADSIZE);
+			glVertex3f((x + 1) * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
 
 			// Top Right vertex
 			glTexCoord2i(1, 1);
 			glNormal3i(0, 1, 0);
 			glVertex3f((x + 1) * GROUND_QUADSIZE, 0, (z + 1) * GROUND_QUADSIZE);
 
-			// Bottom Right vertex
-			glTexCoord2i(1, 0);
+			// Top Left vertex
+			glTexCoord2i(0, 1);
 			glNormal3i(0, 1, 0);
-			glVertex3f((x + 1) * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
+			glVertex3f(x * GROUND_QUADSIZE, 0, (z + 1) * GROUND_QUADSIZE);
+
+			// Bottom Left vertex
+			glTexCoord2i(0, 0);
+			glNormal3i(0, 1, 0);
+			glVertex3f(x * GROUND_QUADSIZE, 0, z * GROUND_QUADSIZE);
+
 		}
 	}
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+}
+
+void render_road(void)
+{
+	reset_material_properties();
+	glEnable(GL_TEXTURE_2D);
+	bind_texture(TEXTURE_ROAD);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -45); // shove the road further away into the z axis
+
+	glBegin(GL_QUAD_STRIP);
+
+	// The magic number 5 strikes again. Or maybe it's GROUNDSIZE. It is isn't it.
+	// The road is 2 * GROUNDSIZE units wide.
+	for (int i = -GROUNDSIZE * 5; i < GROUNDSIZE * 5; i += GROUND_QUADSIZE) 
+	{
+		// Top vertex
+		glNormal3f(0, 1, 0); // Normal pointing up along the Y axis
+		glTexCoord2i(1, i % 2); // who knew a gin and tonic was all it took to type % 2
+		glVertex3f(i, 0.01f, GROUND_QUADSIZE * 2);
+
+		// Bottom vertex
+		glNormal3f(0, 1, 0); // Normal pointing up along the Y axis
+		glTexCoord2i(0, i % 2);
+		glVertex3f(i, 0.01f, 0);
+	}
+
+	glEnd();
+
+	glPopMatrix();
 }
 
 void test_render(int mode)

@@ -324,6 +324,7 @@ void init_textures(void)
 	textureRegistry[TEXTURE_ARMSTRONG] = load_texture_RGB("textures/armstrong.ppm");
 	textureRegistry[TEXTURE_JONADAM] = load_texture_RGB("textures/jon-adam-stare.ppm");
 	textureRegistry[TEXTURE_FRING] = load_texture_RGB("textures/fring1.ppm");
+	textureRegistry[TEXTURE_ROAD] = load_texture_RGB("textures/road.ppm");
 	show_texture_registry();
 
 	printf("Textures initialized\n");

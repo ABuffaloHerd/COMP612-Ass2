@@ -1,6 +1,7 @@
 y:\github\comp612_ass2\assignment 2\debug\vc143.pdb
 y:\github\comp612_ass2\assignment 2\debug\vc143.idb
 y:\github\comp612_ass2\assignment 2\debug\texture.obj
+y:\github\comp612_ass2\assignment 2\debug\staticobjects.obj
 y:\github\comp612_ass2\assignment 2\debug\source.obj
 y:\github\comp612_ass2\assignment 2\debug\soundsystem.obj
 y:\github\comp612_ass2\assignment 2\debug\renderlist.obj
@@ -10,21 +11,12 @@ y:\github\comp612_ass2\assignment 2\debug\ground.obj
 y:\github\comp612_ass2\assignment 2\debug\gameobject.obj
 y:\github\comp612_ass2\assignment 2\debug\displaylist.obj
 y:\github\comp612_ass2\assignment 2\debug\camera.obj
-y:\github\comp612_ass2\assignment 2\debug\staticobjects.obj
+y:\github\comp612_ass2\debug\assignment 2.exe
+y:\github\comp612_ass2\assignment 2\debug\assignment 2.ilk
 y:\github\comp612_ass2\debug\assignment 2.pdb
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\cl.command.1.tlog
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\cl.read.1.tlog
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\cl.write.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link-cvtres.read.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link-cvtres.write.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link-rc.read.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link-rc.write.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088-cvtres.read.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088-cvtres.write.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088-rc.read.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088-rc.write.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088.read.1.tlog
-y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.11088.write.1.tlog
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.command.1.tlog
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.read.1.tlog
 y:\github\comp612_ass2\assignment 2\debug\assignment 2.tlog\link.write.1.tlog

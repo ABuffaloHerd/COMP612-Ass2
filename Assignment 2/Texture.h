@@ -36,6 +36,7 @@ typedef enum _texname
 	TEXTURE_FRING = 3,
 	TEXTURE_JONADAM = 4,
 	TEXTURE_ARMSTRONG = 5,
+	TEXTURE_ROAD = 6,
 	TEXTURE_COUNT
 } TextureType;
 

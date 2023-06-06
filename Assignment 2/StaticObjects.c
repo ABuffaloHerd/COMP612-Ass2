@@ -8,6 +8,9 @@ void update_cylinder(GameObject* cylinder);
 
 void render_gigantic_gus_fring(void)
 {
+	// yeah um
+	// gus fring isn't lit properly sooo
+
 	reset_material_properties();
 
 	glPushMatrix();
@@ -87,6 +90,8 @@ GameObject* trollface_cylinder(GLfloat pos[3])
 
 	obj->update = update_cylinder;
 	obj->render = render_cylinder;
+
+	return obj;
 }
 
 void update_cylinder(GameObject* cylinder)

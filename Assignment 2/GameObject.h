@@ -15,15 +15,17 @@ inline double rad(double deg)
 
 typedef struct _obj
 {
-	char tag[256]; // 255 characters is plenty
+	char tag[255]; // only used once. can you believe it?
 	GLfloat pos[3];
 	GLfloat rot[3];
-
-	Texture* texture; // TODO: memory leak lol
 
 	void(*render)(struct _obj*);
 	void(*update)(struct _obj*);
 
+	// only used by bullet
+	GLfloat heading[3];
+
+	// used by bullets and missiles
 	unsigned int timer;
 	unsigned int isTimed;
 } GameObject;
@@ -39,3 +41,6 @@ GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3]);
 // Bus
 void render_bus(GameObject* bus);
 void update_bus(GameObject* bus);
+
+// bullets
+GameObject* instantiate_bullet(GLfloat pos[3]);

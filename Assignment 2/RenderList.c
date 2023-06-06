@@ -8,14 +8,11 @@ void renderlist_push(RenderList* list, GameObject* object)
 	}
 	else
 	{
-		printf("Realloc!\n");
 		list->objects = (GameObject**)realloc(list->objects, (list->size + 1) * sizeof(GameObject*));
 	}
 
 	list->objects[list->size] = object;
 	list->size++;
-
-	printf("size is now %d\n", list->size);
 }
 
 RenderList* renderlist_init(void)
@@ -65,12 +62,29 @@ void renderlist_update(RenderList* list)
 			// Reallocate the objects array to the new size
 			list->size--;
 			list->objects = realloc(list->objects, list->size * sizeof(GameObject*));
-
-			printf("Destroyed object\n");
 		}
 		else
 		{
 			i++;
+		}
+	}
+}
+
+GameObject* renderlist_find(char* tag, RenderList* list)
+{
+	printf("Renderlist FIND =================================D\n");
+	for (int i = 0; i < list->size; i++)
+	{
+		GameObject* obj = list->objects[i];
+		if (obj->tag[0] = '\0')
+		{
+			printf("Skipped find\n");
+			continue;
+		}
+		if (strcmp(obj->tag, tag) == 0)
+		{
+			printf("Find found an object\n");
+			return obj;
 		}
 	}
 }

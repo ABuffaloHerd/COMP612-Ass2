@@ -3,9 +3,12 @@
 #define VELOCITY 90.0f * -1
 extern const float FRAME_TIME_SEC;
 
+GameObject* instantiate_missile(GLfloat pos[3]);
 void update_missile(GameObject* missile);
 void render_missile(GameObject* missile);
-GameObject* instantiate_missile(GLfloat pos[3]);
+
+void update_bullet(GameObject* bullet);
+void render_bullet(GameObject* bullet);
 
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*))
 {
@@ -112,17 +115,19 @@ void render_missile(GameObject* missile)
 	reset_material_properties();
 }
 
+// This indestructible bus will plough through anything it comes across. If only real buses could do that.
 void update_bus(GameObject* bus)
 {
 	// Yeah, this thing moves at 10m/s 
-	bus->pos[0] += 10 * FRAME_TIME_SEC;
+	bus->pos[0] += 100 * FRAME_TIME_SEC;
 
 	// This is a genuine magic number, i have no fucking clue why it's 5 or how that relates to the size of the ground plane. I just know it works.
+	// So it turns out GROUNDSIZE is 5. huh.
 	if(bus->pos[0] > GROUNDSIZE * 5)
 		bus->pos[0] = -GROUNDSIZE * 5;
 }
 
-// this is one depressing bus
+// this is one depressing object.
 void render_bus(GameObject* bus)
 {
 	// auckland transport coloured bus
@@ -180,6 +185,67 @@ void render_bus(GameObject* bus)
 
 		glPopMatrix();
 	
+	glPopMatrix();
+}
+
+void random_heading(GLfloat heading[3])
+{
+	// Generate random numbers between -1 and 1
+	GLfloat x = (GLfloat)rand() / (RAND_MAX / 2) - 1.0f;
+	GLfloat y = (GLfloat)rand() / (RAND_MAX / 2) - 1.0f;
+	GLfloat z = (GLfloat)rand() / (RAND_MAX / 2) - 1.0f;
+
+	// Normalize the vector
+	GLfloat len = sqrt(x * x + y * y + z * z);
+	heading[0] = x / len;
+	heading[1] = y / len;
+	heading[2] = z / len;
+}
+
+GameObject* instantiate_bullet(GLfloat pos[3])
+{
+	GameObject* bullet = (GameObject*)malloc(sizeof(GameObject));
+	bullet->pos[0] = pos[0];
+	bullet->pos[1] = pos[1];
+	bullet->pos[2] = pos[2];
+
+	bullet->rot[0] = 0;
+	bullet->rot[1] = 0;
+	bullet->rot[2] = 0;
+
+	bullet->isTimed = 1;
+	bullet->timer = 5 * 120; // 5 seconds at 120fps
+
+	bullet->update = update_bullet;
+	bullet->render = render_bullet;
+
+	random_heading(bullet->heading);
+
+	return bullet;
+}
+
+#define BULLET_VELOCITY 60
+void update_bullet(GameObject* bullet)
+{
+	bullet->pos[0] += bullet->heading[0] * BULLET_VELOCITY * FRAME_TIME_SEC;
+	bullet->pos[1] += bullet->heading[1] * BULLET_VELOCITY * FRAME_TIME_SEC;
+	bullet->pos[2] += bullet->heading[2] * BULLET_VELOCITY * FRAME_TIME_SEC;
+
+	bullet->timer--;
+}
+
+void render_bullet(GameObject* bullet)
+{
+	// select materials
+	reset_material_properties();
+	GLfloat red[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	GLfloat emm[] = { 0.5f, 0.0f, 0.5f, 1.0f };
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+	glMaterialfv(GL_FRONT, GL_EMISSION, emm);
+
+	glPushMatrix();
+	glTranslatef(bullet->pos[0], bullet->pos[1], bullet->pos[2]);
+	glutSolidSphere(1, 10, 5);
 	glPopMatrix();
 }
 

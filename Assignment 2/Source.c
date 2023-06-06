@@ -18,7 +18,7 @@
 #include <Windows.h>
 #include <freeglut.h>
 #include <math.h>
-#include <time.h>q
+#include <time.h>
 
 #include "Ground.h"
 #include "Camera.h"
@@ -169,6 +169,9 @@ cameramotion_t keyboardCameraMotion = { MOTION_NONE, MOTION_NONE };
 
 #define KEY_FIRE_MISSILE	32 // space
 
+#define KEY_TOGGLE_BOSS		'b'
+#define KEY_TELEPORT		'p'
+
 
 // Define all GLUT special keys used for input (add any new key definitions here).
 
@@ -218,16 +221,10 @@ unsigned int pushMissile = 0;
 // Camera position and orientation. Also a global variable ho ho ho!
 Camera* c;
 
-// copyer
+// copter
 GameObject* copter;
 GameObject* cursor;
-
-// what are we controlling? 
-GameObject* copter;
-
-// TEXTURE TEST
-Texture* trollface;
-float texture_rotation;
+GameObject* enemyCopter;
 
 // DIsplay list inator
 DisplayList* displayList;
@@ -304,10 +301,10 @@ void display(void)
 
 	// Camera looks at whatever the controlled object is
 	// camera update handles the positioning
-
 	gluLookAt(c->pos[0], c->pos[1], c->pos[2],
 		copter->pos[0], copter->pos[1], copter->pos[2],
 		0, 1, 0);
+
 
 	// render objects
 	copter->render(copter);
@@ -318,6 +315,7 @@ void display(void)
 	renderlist_render(renderList);
 
 	drawOrigin();
+
 
 	glutSwapBuffers();
 }
@@ -438,6 +436,15 @@ void keyPressed(unsigned char key, int x, int y)
 			glDisable(GL_LIGHT1);
 		else
 			glEnable(GL_LIGHT1);
+		break;
+
+	case KEY_TOGGLE_BOSS:
+		toggle_enemy(enemyCopter);
+		break;
+	case KEY_TELEPORT:
+		copter->pos[0] = 300;
+		copter->pos[1] = 50;
+		copter->pos[2] = 0;
 		break;
 
 	case KEY_FIRE_MISSILE: // no functions here
@@ -662,20 +669,33 @@ void init(void)
 	glClearColor(0.98, 0.373, 0.333, 1.0); // set background colour to sunset orange #FA5F55
 	// Anything that relies on lighting or specifies normals must be initialised after initLights.
 
+	// Textures
 	init_textures();
 
+	// Display list
 	displayList = init_displaylist();
 	insert_displaylist(displayList, render_ground);
-	//insert_displaylist(displayList, texture_test);
 	insert_displaylist(displayList, render_sun);
 	insert_displaylist(displayList, render_gigantic_gus_fring);
+	insert_displaylist(displayList, render_road);
 
 	// Render list 
 	renderList = renderlist_init();
 	init_cylinders();
 
 	GameObject* bus = new_gameobject(render_bus, update_bus);
+	bus->pos[2] = -40; // position bus on the road
 	renderlist_push(renderList, bus);
+
+	enemyCopter = new_gameobject(render_enemy_helicopter, update_enemy_helicopter);
+	enemyCopter->pos[0] = 400;
+	enemyCopter->pos[1] = 50;
+	enemyCopter->pos[2] = 0;
+
+	enemyCopter->rot[1] = 180;
+
+	strncpy(enemyCopter->tag, "enemy", 5);
+	renderlist_push(renderList, enemyCopter);
 }
 
 void init_gameobjects(void)
@@ -694,7 +714,7 @@ void init_gameobjects(void)
 void init_cylinders(void)
 {
 	GLfloat pos[3];
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 100; i++) // i is number of cylinders
 	{
 		pos[0] = randf() * POSMAX - (POSMAX / 2);
 		pos[1] = 0;
@@ -711,12 +731,11 @@ void fogger(void)
 	glEnable(GL_FOG);
 
 	GLfloat fogColor[4] = { 0.98, 0.373, 0.333, 1.0 };
-	glFogi(GL_FOG_MODE, GL_EXP2);
-	glFogfv(GL_FOG_COLOR, fogColor);
-	glFogf(GL_FOG_DENSITY, 0.005);
-	glFogf(GL_FOG_START, 5.0);
-	glFogf(GL_FOG_END, 20.0);
-
+	glFogi	(GL_FOG_MODE, GL_EXP2);
+	glFogfv	(GL_FOG_COLOR, fogColor);
+	glFogf	(GL_FOG_DENSITY, 0.003);
+	glFogf	(GL_FOG_START, 7.0);
+	glFogf	(GL_FOG_END, 20.0);
 }
 /*
 	Advance our animation by FRAME_TIME milliseconds.
@@ -745,8 +764,6 @@ void think(void)
 		pushMissile = 0;
 	}
 
-	texture_rotation += 50 * FRAME_TIME_SEC;
-
 	// update all interactive objects
 	renderlist_update(renderList);
 
@@ -754,9 +771,6 @@ void think(void)
 		Keyboard motion handler: complete this section to make your "player-controlled"
 		object respond to keyboard input.
 	*/
-
-	// update the current controlled object
-
 	// no fucking clue why it has to be -sin or -cos so i'm assuming it's just black magic
 	float dx = MOVESPEED * FRAME_TIME_SEC * cos(rad(copter->rot[1]));
 	float dz = MOVESPEED * FRAME_TIME_SEC * -sin(rad(copter->rot[1]));

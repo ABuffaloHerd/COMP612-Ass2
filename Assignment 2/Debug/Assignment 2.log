@@ -1,5 +1,93 @@
-﻿  StaticObjects.c
-Y:\GitHub\COMP612_Ass2\Assignment 2\StaticObjects.c(90): warning C4716: 'trollface_cylinder': must return a value
+﻿  Camera.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(28,18): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(29,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(32,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(33,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(34,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  DisplayList.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\DisplayList.c(32,20): warning C4018: '<': signed/unsigned mismatch
+  GameObject.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(6,48): warning C4030: first formal parameter list longer than the second list
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(25,12): warning C4113: 'void (__cdecl *)(GameObject)' differs in parameter lists from 'void (__cdecl *)(_obj *)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(50,51): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(50,108): warning C4244: 'function': conversion from 'double' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(57,1): warning C4029: declared formal parameter list different from definition
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(80,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(81,39): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(134,23): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\GameObject.c(199,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Ground.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(22,23): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(22,47): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(27,23): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(27,53): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(32,17): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(32,47): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(37,17): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(37,41): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(64,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(69,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(128,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(128,32): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(129,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(129,31): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(132,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(132,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(133,14): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Ground.c(133,20): warning C4244: 'function': conversion from 'int' to 'GLfloat', possible loss of data
+  Helicopter.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(37,21): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(38,22): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(60,23): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(242,39): warning C4047: 'function': 'double *' differs in levels of indirection from 'int'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(242,36): warning C4024: 'modf': different types for formal and actual parameter 2
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(242,17): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Helicopter.c(252,21): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Misc.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Misc.c(14,33): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+  RenderList.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\RenderList.c(76,20): warning C4018: '<': signed/unsigned mismatch
+  SoundSystem.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\SoundSystem.c(6,2): warning C4133: 'initializing': incompatible types - from 'unsigned short [14]' to 'const char *'
+Y:\GitHub\COMP612_Ass2\Assignment 2\SoundSystem.c(7,2): warning C4133: 'initializing': incompatible types - from 'unsigned short [18]' to 'const char *'
+Y:\GitHub\COMP612_Ass2\Assignment 2\SoundSystem.c(8,2): warning C4133: 'initializing': incompatible types - from 'unsigned short [18]' to 'const char *'
+Y:\GitHub\COMP612_Ass2\Assignment 2\SoundSystem.c(9,2): warning C4133: 'initializing': incompatible types - from 'unsigned short [37]' to 'const char *'
+Y:\GitHub\COMP612_Ass2\Assignment 2\SoundSystem.c(14,27): warning C4133: 'function': incompatible types - from 'const char *' to 'LPCWSTR'
+  Source.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(247,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(248,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(249,9): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(243,31): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(244,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(661,8): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(669,19): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(669,26): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(669,33): warning C4305: 'function': truncation from 'double' to 'GLclampf'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(686,35): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(690,31): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(706,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(707,26): warning C4113: 'void (__cdecl *)(GameObject *)' differs in parameter lists from 'void (__cdecl *)(GameObject)'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(724,29): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(736,31): warning C4305: 'function': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(733,24): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(775,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(776,40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(778,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Source.c(779,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  StaticObjects.c
+  Texture.c
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(97,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(123,45): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(124,47): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(125,46): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(252,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(279,45): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(280,47): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(281,46): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+Y:\GitHub\COMP612_Ass2\Assignment 2\Texture.c(282,47): warning C4244: '=': conversion from 'float' to 'GLubyte', possible loss of data
+  Generating Code...
+Y:\GitHub\COMP612_Ass2\Assignment 2\RenderList.c(90): warning C4715: 'renderlist_find': not all control paths return a value
+Y:\GitHub\COMP612_Ass2\Assignment 2\Camera.c(66): warning C4716: 'new_camera': must return a value
   Assignment 2.vcxproj -> Y:\GitHub\COMP612_Ass2\Debug\Assignment 2.exe
   Y:\GitHub\COMP612_Ass2\freeglut\bin\freeglut.dll
   1 File(s) copied
@@ -11,5 +99,6 @@ Y:\GitHub\COMP612_Ass2\Assignment 2\StaticObjects.c(90): warning C4716: 'trollfa
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\ground.ppm
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\jon-adam-stare.ppm
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\kys.ppm
+  Y:\GitHub\COMP612_Ass2\Assignment 2\textures\road.ppm
   Y:\GitHub\COMP612_Ass2\Assignment 2\textures\trollface.ppm
-  6 File(s) copied
+  7 File(s) copied

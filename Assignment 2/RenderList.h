@@ -14,3 +14,4 @@ void renderlist_push(RenderList* list, GameObject* object);
 void renderlist_render(RenderList* list);
 void renderlist_update(RenderList* list);
 RenderList* renderlist_init(void);
+GameObject* renderlist_find(char* tag, RenderList* list);
