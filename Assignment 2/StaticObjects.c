@@ -3,6 +3,7 @@
 extern GameObject* copter;
 extern const float FRAME_TIME_SEC;
 
+void render_funnier_cylinder(GameObject* haha);
 void render_cylinder(GameObject* cylinder);
 void update_cylinder(GameObject* cylinder);
 
@@ -17,7 +18,7 @@ void render_gigantic_gus_fring(void)
 	glEnable(GL_TEXTURE_2D);
 	bind_texture(TEXTURE_FRING);
 
-	glTranslatef(100.0f, 50.0f, 0.0f);
+	glTranslatef(500.0f, 10.0f, 0.0f);
 
 	// rotate to face cam
 	glRotatef(90, 1, 0, 0);
@@ -85,18 +86,23 @@ GameObject* trollface_cylinder(GLfloat pos[3])
 	// adjust z rotation to face upwards
 	obj->rot[2] = 0;
 
+	obj->velocity = rand() % 500;
+
 	obj->timer = 0;
 	obj->isTimed = 0;
 
 	obj->update = update_cylinder;
-	obj->render = render_cylinder;
+
+	// additional funny:
+	int isFunny = rand() % 2;
+	obj->render = isFunny ? render_funnier_cylinder : render_cylinder;
 
 	return obj;
 }
 
 void update_cylinder(GameObject* cylinder)
 {
-	cylinder->rot[2] += 10.0f * FRAME_TIME_SEC;
+	cylinder->rot[2] += cylinder->velocity * FRAME_TIME_SEC;
 }
 
 #define CYLINDER_HEIGHT 8
@@ -137,6 +143,68 @@ void render_cylinder(GameObject* cylinder)
 	// move to top of cylinder
 	glTranslatef(0, 0, CYLINDER_HEIGHT);
 	gluDisk(qobj, 0, CYLINDER_RADIUS, 20, 20);
+	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
+	gluDeleteQuadric(qobj);
+}
+
+void render_funnier_cylinder(GameObject* haha)
+{
+	// create quadric objects
+	GLUquadricObj* qobj = gluNewQuadric();
+	GLUquadricObj* qsphere = gluNewQuadric();
+
+	// generate normals and texture coordinates
+	gluQuadricDrawStyle(qobj, GLU_FILL);
+	gluQuadricNormals(qobj, GLU_SMOOTH);
+	gluQuadricTexture(qobj, GL_TRUE);
+
+	gluQuadricDrawStyle(qsphere, GLU_FILL);
+	gluQuadricNormals(qsphere, GLU_SMOOTH);
+	gluQuadricTexture(qsphere, GL_TRUE);
+
+	// set material properties to default
+	reset_material_properties();
+
+	// transformation push
+
+	// bind texture
+	glEnable(GL_TEXTURE_2D);
+
+	bind_texture(TEXTURE_TROLL);
+
+	// translate to position
+	glPushMatrix();
+		glTranslatef(haha->pos[0], haha->pos[1], haha->pos[2]);
+
+		// rotate to orientation
+		glRotatef(haha->rot[0], 1, 0, 0);
+		glRotatef(haha->rot[1], 0, 1, 0);
+		glRotatef(haha->rot[2], 0, 0, 1);
+
+		// size is a hardcoded magic number (4 & 8)
+		gluCylinder(qobj, CYLINDER_RADIUS, CYLINDER_RADIUS, CYLINDER_HEIGHT, 20, 20);
+
+		// push for orbiting spheres
+		glPushMatrix();
+
+			glTranslatef(7.0f, 0.0f, 4.0f);
+			bind_texture(TEXTURE_JONADAM);
+			gluSphere(qsphere, 2.4f, 20, 20);
+
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(-7.0f, 0.0f, 4.0f);
+			bind_texture(TEXTURE_KYS);
+			gluSphere(qsphere, 2.4f, 20, 20);
+		glPopMatrix();
+
+		// move to top of cylinder
+		glTranslatef(0, 0, CYLINDER_HEIGHT);
+		bind_texture(TEXTURE_ARMSTRONG);
+		gluDisk(qobj, 0, CYLINDER_RADIUS, 20, 20);
 	glPopMatrix();
 
 	glDisable(GL_TEXTURE_2D);

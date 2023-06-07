@@ -3,9 +3,9 @@
 extern const float FRAME_TIME_SEC;
 extern RenderList* renderList;
 
-#define SPINRATE 1000.0f
 #define TEACUP_DIST 4.0f
 #define COPTER_SCALE 2.0
+#define M_PI 3.14159
 
 void render_helicopter(GameObject* this)
 {
@@ -135,7 +135,7 @@ void render_helicopter(GameObject* this)
 
 	glPopMatrix(); // pop the body
 
-	proprot += SPINRATE * FRAME_TIME_SEC; // update rotor angle
+	proprot += this->velocity * FRAME_TIME_SEC; // update rotor angle
 }
 
 void render_enemy_helicopter(GameObject* this)
@@ -146,7 +146,7 @@ void render_enemy_helicopter(GameObject* this)
 
 	setMaterialColor(1.0f, 0.0f, 0.0f); // set material color
 	// glow purpleish
-	GLfloat purpur[] = { 1.0f, 0.0f, 0.1f, 1.0f };
+	GLfloat purpur[] = { 1.0f, 0.0f, 0.3f, 1.0f };
 	glMaterialfv(GL_FRONT, GL_EMISSION, purpur);
 
 	glPushMatrix(); // push the body
@@ -234,7 +234,7 @@ void render_enemy_helicopter(GameObject* this)
 
 	reset_material_properties();
 
-	proprot += SPINRATE * FRAME_TIME_SEC; // update rotor angle
+	proprot += 1000.0f * FRAME_TIME_SEC; // update rotor angle
 }
 
 void update_helicopter(GameObject* this)
@@ -280,8 +280,13 @@ void update_enemy_helicopter(GameObject* enemy)
 		{387.5f, 30.0f, 12.5f}   // Below bottom left
 	};
 	static unsigned int pos_index = 0; // index of the current target position
-
+	static AttackType attacktype = RANDOM; // whether the enemy is aiming at the player
 	static AIState state = IDLE; // start idle
+	static int cooldown = 0; // delay bullet shots to (hopefully) reduce lag
+
+	// for border of wave and particle
+	static float angleT = 0;
+	static int objcount = 0;
 
 	// update the frame count
 	framecount++;
@@ -290,11 +295,14 @@ void update_enemy_helicopter(GameObject* enemy)
 	switch (state)
 	{
 	case IDLE:
+		// reset certain variables
 		printf("Enemy AI: IDLE\n");
+		angleT = 0;
+		objcount = 0;
 		break;
 	case MOVE:
 		// move towards the next position
-		// i have accidentally implemented easing. i'm not even mad
+		// i have accidentally implemented easing
 		enemy->pos[0] += (positions[pos_index][0] - enemy->pos[0]) * FRAME_TIME_SEC * 5;
 		enemy->pos[1] += (positions[pos_index][1] - enemy->pos[1]) * FRAME_TIME_SEC * 5;
 		enemy->pos[2] += (positions[pos_index][2] - enemy->pos[2]) * FRAME_TIME_SEC * 5;
@@ -302,7 +310,30 @@ void update_enemy_helicopter(GameObject* enemy)
 		break;
 	case SHOOT: // one bullet per frame.
 		printf("Enemy AI: SHOOT\n");
-		renderlist_push(renderList, instantiate_bullet(enemy->pos));
+		if (attacktype == AIMED)
+		{
+			if (!cooldown)
+			{
+				renderlist_push(renderList, instantiate_bullet(enemy->pos, attacktype));
+				cooldown = 4;
+			}
+			else cooldown--;
+		}
+		else if (attacktype == RANDOM)
+		{
+			renderlist_push(renderList, instantiate_bullet(enemy->pos, attacktype));
+		}
+		else
+		{
+			// border of wave and particle
+			for (int i = 0; i < 5; i++)
+			{
+				GLfloat heading[3] = { -sin(angleT * M_PI / 180.0), 0, cos(angleT * M_PI / 180.0) };
+				renderlist_push(renderList, instantiate_bullet_given_heading(enemy->pos, heading));
+				angleT += sin(objcount * M_PI / 180.0) * 6; // Rotate angle back and forth
+				objcount++;
+			}
+		}
 		break;
 	}
 
@@ -323,5 +354,13 @@ void update_enemy_helicopter(GameObject* enemy)
 		printf("Enemy AI: CHANGING STATE TO SHOOT\n");
 		printf("Jedi! Blast em'!\n");
 		state = SHOOT;
+		
+		// decide which attack to use in this cycle
+		if(rand() % TYPE_COUNT == 0)
+			attacktype = AIMED;
+		else if(rand() % TYPE_COUNT == 1)
+			attacktype = RANDOM;
+		else
+			attacktype = BOWP;
 	}
 }

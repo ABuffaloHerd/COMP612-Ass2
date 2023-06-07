@@ -1,5 +1,7 @@
 #include "Misc.h"
 
+extern GameObject* copter;
+
 void setMaterialColor(GLfloat r, GLfloat g, GLfloat b)
 {
     GLfloat color[] = { r, g, b, 1.0f };

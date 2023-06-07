@@ -13,14 +13,23 @@ inline double rad(double deg)
 	return deg * (3.14159 / 180.0);
 }
 
+typedef enum
+{
+	RANDOM,
+	AIMED,
+	BOWP,
+	TYPE_COUNT
+} AttackType;
+
 typedef struct _obj
 {
-	char tag[255]; // only used once. can you believe it?
 	GLfloat pos[3];
 	GLfloat rot[3];
 
 	void(*render)(struct _obj*);
 	void(*update)(struct _obj*);
+
+	GLfloat velocity; // only used by cylinders and player helicopter
 
 	// only used by bullet
 	GLfloat heading[3];
@@ -33,8 +42,6 @@ typedef struct _obj
 GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*));
 void destroy_gameobject(GameObject* object);
 
-void render_cursor(GameObject*);
-
 // Missile
 GameObject* instantiate_missile(GLfloat pos[3], GLfloat rot[3]);
 
@@ -43,4 +50,5 @@ void render_bus(GameObject* bus);
 void update_bus(GameObject* bus);
 
 // bullets
-GameObject* instantiate_bullet(GLfloat pos[3]);
+GameObject* instantiate_bullet(GLfloat pos[3], AttackType type);
+GameObject* instantiate_bullet_given_heading(GLfloat pos[3], GLfloat heading[3]);

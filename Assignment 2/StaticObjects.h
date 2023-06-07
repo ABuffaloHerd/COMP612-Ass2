@@ -12,3 +12,4 @@
 void render_sun(void);
 void render_gigantic_gus_fring(void);
 GameObject* trollface_cylinder(GLfloat pos[3]);
+

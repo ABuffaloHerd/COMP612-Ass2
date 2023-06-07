@@ -221,9 +221,8 @@ unsigned int pushMissile = 0;
 // Camera position and orientation. Also a global variable ho ho ho!
 Camera* c;
 
-// copter
+// copters
 GameObject* copter;
-GameObject* cursor;
 GameObject* enemyCopter;
 
 // DIsplay list inator
@@ -308,14 +307,12 @@ void display(void)
 
 	// render objects
 	copter->render(copter);
-	cursor->render(cursor);
 
 	// Render static objects
 	render_displaylist(displayList);
 	renderlist_render(renderList);
 
 	drawOrigin();
-
 
 	glutSwapBuffers();
 }
@@ -687,14 +684,12 @@ void init(void)
 	bus->pos[2] = -40; // position bus on the road
 	renderlist_push(renderList, bus);
 
-	enemyCopter = new_gameobject(render_enemy_helicopter, update_enemy_helicopter);
+	enemyCopter = new_gameobject(render_enemy_helicopter, 0); // fight disabled at start
 	enemyCopter->pos[0] = 400;
 	enemyCopter->pos[1] = 50;
 	enemyCopter->pos[2] = 0;
 
-	enemyCopter->rot[1] = 180;
-
-	strncpy(enemyCopter->tag, "enemy", 5);
+	enemyCopter->rot[1] = 180; // face player's general direction
 	renderlist_push(renderList, enemyCopter);
 }
 
@@ -704,17 +699,18 @@ void init_gameobjects(void)
 	c->locked = 1; // lock camera at the start
 
 	copter = new_gameobject(render_helicopter, 0);
-	cursor = new_gameobject(render_cursor, 0);
 	
-	copter->pos[1] = 5; // set helicopter to hover 5 units above ground
+	copter->pos[1] = 1; // set helicopter to sit on the ground
+	copter->velocity = 0;
 }
 
 // define how dense the cylinders are
 #define POSMAX 800
+#define CYLINDER_COUNT 70
 void init_cylinders(void)
 {
 	GLfloat pos[3];
-	for (int i = 0; i < 100; i++) // i is number of cylinders
+	for (int i = 0; i < CYLINDER_COUNT; i++) // i is number of cylinders
 	{
 		pos[0] = randf() * POSMAX - (POSMAX / 2);
 		pos[1] = 0;
@@ -801,7 +797,22 @@ void think(void)
 	if (keyboardMotion.Heave != MOTION_NONE) 
 	{
 		/* TEMPLATE: Move your object down if .Heave < 0, or up if .Heave > 0 */
+
 		copter->pos[1] += keyboardMotion.Heave * FRAME_TIME_SEC * MOVESPEED;
+		if (copter->pos[1] < 1 || copter->velocity < 800.0f)
+		{
+			copter->pos[1] = 1;
+		}
+
+		if (keyboardMotion.Heave > 0)
+			copter->velocity += 200.0f * FRAME_TIME_SEC;
+		else if (keyboardMotion.Heave < 0)
+		{
+			copter->velocity -= 200.0f * FRAME_TIME_SEC;
+			if(copter->velocity < 0)
+				copter->velocity = 0;
+		}
+
 	}
 
 	// camera controls
@@ -814,10 +825,6 @@ void think(void)
 	{
 		c->rot[0] += keyboardCameraMotion.Tilt * FRAME_TIME_SEC * TILTSPEED;
 	}
-
-	// more trouble than it's worth to get working
-	//copter->rot[2] = -1 * keyboardMotion.Surge * 10.0f;
-	//copter->rot[0] = 1 * keyboardMotion.Sway * 10.0f;
 }
 
 /*
@@ -853,6 +860,10 @@ void initLights(void)
 	// LIGHT1 is for spotlight
 	glEnable(GL_LIGHT1);
 	glLighti(GL_LIGHT1, GL_SPOT_EXPONENT, 96); // smoothen out the spotlight
+
+	// LIGHT2 is the bus light
+	glEnable(GL_LIGHT2);
+	glLighti(GL_LIGHT2, GL_SPOT_EXPONENT, 69);
 
 	// Make GL normalize the normal vectors we supply.
 	glEnable(GL_NORMALIZE);

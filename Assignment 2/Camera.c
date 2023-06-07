@@ -63,4 +63,6 @@ Camera* new_camera(void)
 
 	c->update = update_camera;
 	c->set_target = set_target;
+
+	return c;
 }

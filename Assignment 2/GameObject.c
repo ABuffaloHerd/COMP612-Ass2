@@ -2,6 +2,7 @@
 
 #define VELOCITY 90.0f * -1
 extern const float FRAME_TIME_SEC;
+extern GameObject* copter;
 
 GameObject* instantiate_missile(GLfloat pos[3]);
 void update_missile(GameObject* missile);
@@ -26,30 +27,6 @@ GameObject* new_gameobject(void(*render)(GameObject), void(*update)(GameObject*)
 	g->update = update;
 
 	return g;
-}
-
-void render_cursor(GameObject* this)
-{
-	glPushMatrix();
-	glBegin(GL_LINES);
-	glColor4d(1.0, 0.0, 0.0, 1.0);
-	glVertex3f(this->pos[0], this->pos[1], this->pos[2]);
-	glVertex3f(this->pos[0] + 1, this->pos[1], this->pos[2]);
-
-	glColor4d(0.0, 0.0, 1.0, 1.0);
-	glVertex3f(this->pos[0], this->pos[1], this->pos[2]);
-	glVertex3f(this->pos[0], this->pos[1] + 1, this->pos[2]);
-
-	glColor4d(0.0, 1.0, 0.0, 1.0);
-	glVertex3f(this->pos[0], this->pos[1], this->pos[2]);
-	glVertex3f(this->pos[0], this->pos[1], this->pos[2] + 1);
-
-	// one more line that represents the heading of the cursor on the xz plane
-	glColor4d(1.0, 1.0, 1.0, 1.0);
-	glVertex3f(this->pos[0], this->pos[1], this->pos[2]);
-	glVertex3f(this->pos[0] * cos(rad(this->rot[1])) * 1, this->pos[1], this->pos[2] * sin(rad(this->rot[1])) * 1);
-	glEnd();
-	glPopMatrix();
 }
 
 
@@ -184,8 +161,53 @@ void render_bus(GameObject* bus)
 			glutSolidCylinder(0.8f, 5.0f, 10, 10);
 
 		glPopMatrix();
+
+		// light
+		glPushMatrix();
+
+			GLfloat pos[] = { 6.0f, 0.6f, 2.5f, 1.0f };
+			glLightfv(GL_LIGHT2, GL_POSITION, pos);
+
+			// set the colours
+			GLfloat colour[] = { 0.6, 0.6, 0.0, 1.0 };
+			glLightfv(GL_LIGHT2, GL_DIFFUSE, colour);
+			glLightfv(GL_LIGHT2, GL_SPECULAR, colour);
+
+			// set some properties
+			GLfloat down[] = { 1.0f, -0.3f, 0.0f };
+			glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 20.0f);
+			glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, down);
+			glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 2.0f);
+		
+		glPopMatrix();
+
+		// The light object so that we can actually see it
+		glPushMatrix();
+
+		GLfloat pissyellow[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pissyellow);
+		glMaterialfv(GL_FRONT, GL_EMISSION, pissyellow);
+
+		glTranslatef(6.0f, 0.6f, 2.5f);
+		glRotatef(90, 0, 1, 0);
+		glutSolidCylinder(0.4, 0.4, 29, 5);
+
+		glPopMatrix();
 	
 	glPopMatrix();
+}
+
+void aimed_heading(GLfloat here[3], GLfloat there[3], GLfloat out[3])
+{
+	out[0] = there[0] - here[0];
+	out[1] = there[1] - here[1];
+	out[2] = there[2] - here[2];
+
+	// normalize
+	GLfloat len = sqrt(out[0] * out[0] + out[1] * out[1] + out[2] * out[2]);
+	out[0] /= len;
+	out[1] /= len;
+	out[2] /= len;
 }
 
 void random_heading(GLfloat heading[3])
@@ -202,7 +224,7 @@ void random_heading(GLfloat heading[3])
 	heading[2] = z / len;
 }
 
-GameObject* instantiate_bullet(GLfloat pos[3])
+GameObject* instantiate_bullet(GLfloat pos[3], AttackType type)
 {
 	GameObject* bullet = (GameObject*)malloc(sizeof(GameObject));
 	bullet->pos[0] = pos[0];
@@ -219,8 +241,36 @@ GameObject* instantiate_bullet(GLfloat pos[3])
 	bullet->update = update_bullet;
 	bullet->render = render_bullet;
 
-	random_heading(bullet->heading);
+	if (type == AIMED)
+	{
+		aimed_heading(bullet->pos, copter->pos, bullet->heading);
+	}
+	else random_heading(bullet->heading);
 
+	return bullet;
+}
+
+GameObject* instantiate_bullet_given_heading(GLfloat pos[3], GLfloat heading[3])
+{
+	GameObject* bullet = (GameObject*)malloc(sizeof(GameObject));
+	bullet->pos[0] = pos[0];
+	bullet->pos[1] = pos[1];
+	bullet->pos[2] = pos[2];
+
+	bullet->rot[0] = 0;
+	bullet->rot[1] = 0;
+	bullet->rot[2] = 0;
+
+	bullet->isTimed = 1;
+	bullet->timer = 5 * 120; // 5 seconds at 120fps
+
+	bullet->update = update_bullet;
+	bullet->render = render_bullet;
+	
+	bullet->heading[0] = heading[0];
+	bullet->heading[1] = heading[1];
+	bullet->heading[2] = heading[2];
+	
 	return bullet;
 }
 

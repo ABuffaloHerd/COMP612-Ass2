@@ -69,22 +69,3 @@ void renderlist_update(RenderList* list)
 		}
 	}
 }
-
-GameObject* renderlist_find(char* tag, RenderList* list)
-{
-	printf("Renderlist FIND =================================D\n");
-	for (int i = 0; i < list->size; i++)
-	{
-		GameObject* obj = list->objects[i];
-		if (obj->tag[0] = '\0')
-		{
-			printf("Skipped find\n");
-			continue;
-		}
-		if (strcmp(obj->tag, tag) == 0)
-		{
-			printf("Find found an object\n");
-			return obj;
-		}
-	}
-}
